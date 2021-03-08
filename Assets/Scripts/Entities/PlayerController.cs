@@ -1,0 +1,93 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
+
+[RequireComponent(typeof(IAttacking))]
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] private Animator Animator;
+    [SerializeField] private Movement Movement;
+    [SerializeField] private float Health;
+    [SerializeField] private WeaponData StartingWeapon;
+
+    private IAttacking Attacking;
+    private Vector2 inputVector;
+
+    private const float FireAnimationTime = .183f;
+
+    public void OnMove(CallbackContext callback)
+    {
+        inputVector = callback.ReadValue<Vector2>();
+        Movement.SetMoveDirection(inputVector);
+    }
+
+    public void OnFire(CallbackContext callback)
+    {
+        Attacking.SetIsAttacking(callback.performed);
+    }
+
+    public void OnReload(CallbackContext callback)
+    {
+        if (callback.started)
+        {
+            Attacking.Reload();
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void AddAmmo(int ammo)
+    {
+        Attacking.AddAmmo(ammo);
+    }
+
+    private void Start()
+    {
+        Attacking = GetComponent<IAttacking>();
+        Attacking.AssignAttackEvent(OnAttackEvent);
+        SetWeaponData(StartingWeapon);
+        //Attacking.AssignWeaponDataUpdate(WeaponDataUpdate);
+    }
+
+    private void OnDestroy()
+    {
+        Attacking.UnAssignAttackEvent(OnAttackEvent);
+    }
+
+    private void OnAttackEvent()
+    {
+        Animator.SetTrigger("Shoot");
+    }
+
+    public void SetWeaponData(WeaponData data)
+    {
+        Attacking.SetWeaponData(data);
+        Animator.SetFloat("FireRate", data.FireRate / FireAnimationTime);
+    }
+
+    private void Update()
+    {
+        if (!Attacking.GetIsAttacking())
+        {
+            Animator.SetBool("IsMoving", inputVector != Vector2.zero);
+            Movement.SetCanMove(true);
+            //Rb.velocity = (inputVector * MoveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Animator.SetBool("IsMoving", false);
+            Movement.SetCanMove(false);
+            //Rb.velocity = Vector2.zero;
+        }
+    }
+}
