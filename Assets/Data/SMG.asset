@@ -19,3 +19,4 @@ MonoBehaviour:
   ShotDuration: 0.08
   ClipSize: 35
   AmmoType: 0
+  FirePoint: {x: 0, y: 0.127, z: 0}

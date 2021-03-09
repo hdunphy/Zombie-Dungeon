@@ -77,17 +77,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        bool isMoving = false;
         if (!Attacking.GetIsAttacking())
         {
-            Animator.SetBool("IsMoving", inputVector != Vector2.zero);
+            isMoving = inputVector != Vector2.zero;
             Movement.SetCanMove(true);
             //Rb.velocity = (inputVector * MoveSpeed * Time.deltaTime);
         }
         else
         {
-            Animator.SetBool("IsMoving", false);
             Movement.SetCanMove(false);
             //Rb.velocity = Vector2.zero;
         }
+
+        Animator.SetBool("IsMoving", isMoving);
+        Attacking.ShowWeapon(!isMoving);
     }
 }

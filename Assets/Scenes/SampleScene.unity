@@ -495,7 +495,7 @@ MonoBehaviour:
   SpawnWalkerChance: 0.4
   DestroyWalkerChance: 0.1
   WalkerChangeDirectionChance: 0.33
-  EnemyStartNumber: 10
+  EnemyStartNumber: 5
   ShowLevelCreation: 0
 --- !u!4 &1559277935
 Transform:

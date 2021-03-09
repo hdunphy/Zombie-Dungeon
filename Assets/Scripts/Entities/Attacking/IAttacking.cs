@@ -9,6 +9,7 @@ public interface IAttacking
     void AddAmmo(int ammo);
     void SetIsAttacking(bool _isAttacking);
     bool GetIsAttacking();
+    void ShowWeapon(bool isMoving);
     void SetWeaponData(WeaponData data);
     void AssignAttackEvent(Action onAttackEvent);
     void UnAssignAttackEvent(Action onAttackEvent);

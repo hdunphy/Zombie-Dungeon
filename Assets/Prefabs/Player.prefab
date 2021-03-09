@@ -484,7 +484,7 @@ MonoBehaviour:
   Animator: {fileID: 791632960210001306}
   Movement: {fileID: 1136901947794972482}
   Health: 100
-  StartingWeapon: {fileID: 11400000, guid: fb30a0ff5838f2f4a9912294645f6dc2, type: 2}
+  StartingWeapon: {fileID: 11400000, guid: 30c304f772910704380bff6d5f494d7d, type: 2}
 --- !u!114 &-7526041415420937873
 MonoBehaviour:
   m_ObjectHideFlags: 0

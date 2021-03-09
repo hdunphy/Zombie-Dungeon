@@ -40,8 +40,6 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
             StartCoroutine(Shoot());
             nextFire = Time.time + WeaponData.FireRate;
         }
-
-        WeaponRenderer.enabled = isAttacking;
     }
 
     private IEnumerator Shoot()
@@ -108,6 +106,11 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     {
         heldAmmo[WeaponData.AmmoType].Reload(WeaponData.ClipSize);
         UpdateAmmoHUD();
+    }
+
+    public void ShowWeapon(bool canShow)
+    {
+        WeaponRenderer.enabled = canShow;
     }
 
     public void AssignAttackEvent(Action callback)
