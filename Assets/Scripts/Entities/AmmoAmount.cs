@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class AmmoAmount
 {
-    public int AmmoInClip { get; private set; }
     public int TotalAmmo { get; private set; }
 
-    public AmmoAmount(int _ammoInClip, int _totalAmmo)
+
+    public AmmoAmount(int _totalAmmo)
     {
-        AmmoInClip = _ammoInClip;
         TotalAmmo = _totalAmmo;
     }
 
@@ -19,26 +18,25 @@ public class AmmoAmount
         TotalAmmo += ammo;
     }
 
-    public void Reload(int ClipSize)
+    public int Reload(int ClipSize, int AmmoInClip)
     {
+        int _ammoInClip;
+
         if (TotalAmmo <= 0)
-            return;
-
-
-        if (TotalAmmo >= ClipSize)
+        {
+            _ammoInClip = AmmoInClip;
+        }
+        else if (TotalAmmo + AmmoInClip >= ClipSize)
         {
             TotalAmmo -= (ClipSize - AmmoInClip);
-            AmmoInClip = ClipSize;
+            _ammoInClip = ClipSize;
         }
         else
         {
-            AmmoInClip = TotalAmmo;
+            _ammoInClip = AmmoInClip + TotalAmmo;
             TotalAmmo = 0;
         }
-    }
 
-    public void Fire()
-    {
-        AmmoInClip--;
+        return _ammoInClip;
     }
 }

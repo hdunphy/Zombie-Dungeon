@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerAttacking : MonoBehaviour, IAttacking
 {
-    [SerializeField] private WeaponData WeaponData;
     [SerializeField] private LineRenderer FireLine;
     [SerializeField] private SpriteRenderer WeaponRenderer;
     [SerializeField] private Transform FirePoint;
@@ -13,9 +12,11 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
     private bool isAttacking;
     private float nextFire;
-    //private int ammoInClip;
-    //private int totalAmmo;
+    private int currentWeaponIndex;
+    private WeaponData CurrentWeapon => weapons[currentWeaponIndex].Data;
+    private int CurrentAmmo => weapons[currentWeaponIndex].AmmoInClip;
 
+    private List<WeaponObject> weapons;
     private Dictionary<AmmoType, AmmoAmount> heldAmmo;
 
     private Action attackEvent;
@@ -24,33 +25,34 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     void Awake()
     {
         heldAmmo = new Dictionary<AmmoType, AmmoAmount>();
+        weapons = new List<WeaponObject>();
 
         isAttacking = false;
         nextFire = 0;
-
-        //SetWeaponData(WeaponData);
     }
 
     // Update is called once per frame
     void Update()
     {
-        int ammoInClip = heldAmmo[WeaponData.AmmoType].AmmoInClip;
-        if (isAttacking && ammoInClip > 0 && Time.time > nextFire)
+        if (weapons.Count <= 0)
+            return;
+
+        if (isAttacking && CurrentAmmo > 0 && Time.time > nextFire)
         {
             StartCoroutine(Shoot());
-            nextFire = Time.time + WeaponData.FireRate;
+            nextFire = Time.time + CurrentWeapon.FireRate;
         }
     }
 
     private IEnumerator Shoot()
     {
-        RaycastHit2D hitPoint = Physics2D.Raycast(FirePoint.position, FirePoint.up, WeaponData.WeaponDistance);
+        RaycastHit2D hitPoint = Physics2D.Raycast(FirePoint.position, FirePoint.up, CurrentWeapon.WeaponDistance);
 
         if (hitPoint)
         {
             if (hitPoint.transform.TryGetComponent(out EnemyController enemy))
             {
-                enemy.TakeDamage(WeaponData.Damage);
+                enemy.TakeDamage(CurrentWeapon.Damage);
             }
 
             FireLine.SetPosition(0, FirePoint.position);
@@ -59,58 +61,79 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
         else
         {
             FireLine.SetPosition(0, FirePoint.position);
-            FireLine.SetPosition(1, FirePoint.position + FirePoint.up * WeaponData.WeaponDistance);
+            FireLine.SetPosition(1, FirePoint.position + FirePoint.up * CurrentWeapon.WeaponDistance);
         }
 
         TriggerAttackEvent();
         FireLine.enabled = true;
 
-        yield return new WaitForSeconds(WeaponData.ShotDuration);
+        yield return new WaitForSeconds(CurrentWeapon.ShotDuration);
 
         FireLine.enabled = false;
         //SHOW IMPACT EFFECT
 
-        heldAmmo[WeaponData.AmmoType].Fire();
+
+        weapons[currentWeaponIndex].Fire();
         UpdateAmmoHUD();
     }
 
     private void UpdateAmmoHUD()
     {
-        PlayerHUD.Instance.UpdateAmmoAmount(heldAmmo[WeaponData.AmmoType]);
+        PlayerHUD.Instance.UpdateAmmoAmount(CurrentAmmo, heldAmmo[CurrentWeapon.AmmoType].TotalAmmo);
     }
 
     public void SetWeaponData(WeaponData data)
     {
-        WeaponData = data;
-
-        if (!heldAmmo.ContainsKey(data.AmmoType))
+        int index = weapons.FindIndex(x => x.Data == data);
+        if(index >= 0)
         {
-            heldAmmo.Add(data.AmmoType, new AmmoAmount(data.ClipSize, data.ClipSize * NewWeaponClipAmount));
-            UpdateAmmoHUD();
+            currentWeaponIndex = index;
         }
         else
         {
-            AddAmmo(data.ClipSize * NewWeaponClipAmount);
+            weapons.Add(new WeaponObject(data, data.ClipSize));
+            currentWeaponIndex = weapons.Count - 1;
         }
-        WeaponRenderer.sprite = data.Sprite;
-        FirePoint.localPosition = data.FirePoint;
+
+        AddAmmo(data.ClipSize * NewWeaponClipAmount, data.AmmoType);
+
+        UpdateWeapon();
     }
 
-    public void AddAmmo(int ammo)
+    private void UpdateWeapon()
     {
-        heldAmmo[WeaponData.AmmoType].AddAmmo(ammo);
+        WeaponRenderer.sprite = CurrentWeapon.Sprite;
+        FirePoint.localPosition = CurrentWeapon.FirePoint;
+    }
+
+    public void AddAmmo(int ammo, AmmoType ammoType)
+    {
+        if (!heldAmmo.ContainsKey(ammoType))
+        {
+            heldAmmo.Add(ammoType, new AmmoAmount(0));
+        }
+
+        heldAmmo[ammoType].AddAmmo(ammo);
         UpdateAmmoHUD();
     }
 
     public void Reload()
     {
-        heldAmmo[WeaponData.AmmoType].Reload(WeaponData.ClipSize);
+        weapons[currentWeaponIndex].AmmoInClip = heldAmmo[CurrentWeapon.AmmoType].Reload(CurrentWeapon.ClipSize, CurrentAmmo);
         UpdateAmmoHUD();
     }
 
     public void ShowWeapon(bool canShow)
     {
         WeaponRenderer.enabled = canShow;
+    }
+
+    public void CycleWeapon(int direction)
+    {
+        currentWeaponIndex = ++currentWeaponIndex >= weapons.Count ? 0 : currentWeaponIndex;
+
+        UpdateWeapon();
+        UpdateAmmoHUD();
     }
 
     public void AssignAttackEvent(Action callback)

@@ -37,6 +37,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnWeaponCycleNext(CallbackContext callback)
+    {
+        if (callback.started)
+        {
+            Attacking.CycleWeapon(1);
+        }
+    }
+
+    public void OnWeaponCyclePrev(CallbackContext callback)
+    {
+        if (callback.started)
+        {
+            Attacking.CycleWeapon(-1);
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         Health -= damage;
@@ -46,9 +62,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AddAmmo(int ammo)
+    public void AddAmmo(int ammo, AmmoType ammoType)
     {
-        Attacking.AddAmmo(ammo);
+        Attacking.AddAmmo(ammo, ammoType);
     }
 
     private void Start()

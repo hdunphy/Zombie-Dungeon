@@ -398,6 +398,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 53d39658-c2fc-4e4e-927e-195ef069f2d4
     m_ActionName: Player/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8283324180879774783}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnWeaponCycleNext
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ffa26be8-5eba-4648-a775-41156996847f
+    m_ActionName: Player/Next Weapon[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8283324180879774783}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnWeaponCyclePrev
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b9826126-9784-4523-86d1-fe944da9db3f
+    m_ActionName: Player/Prev Weapon[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -497,7 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b9a6aa588d11641904c204025e2891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponData: {fileID: 11400000, guid: 7e697cfcd6b55a0459749d6669e03b2d, type: 2}
   FireLine: {fileID: 2232924508593695794}
   WeaponRenderer: {fileID: 1458634300380766887}
   FirePoint: {fileID: 9085444566952487593}

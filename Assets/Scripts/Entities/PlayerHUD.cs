@@ -21,11 +21,6 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    public void UpdateAmmoAmount(AmmoAmount _ammoAmount)
-    {
-        UpdateAmmoAmount(_ammoAmount.AmmoInClip, _ammoAmount.TotalAmmo);
-    }
-
     public void UpdateAmmoAmount(int currentClip, int totalAmmo)
     {
         AmmoAmmountText.text = $"{currentClip} / {totalAmmo}";
