@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private IAttacking Attacking;
     private Vector2 inputVector;
+    private float CurrentHealth;
 
     private const float FireAnimationTime = .183f;
 
@@ -55,8 +56,10 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Health -= damage;
-        if (Health <= 0)
+        CurrentHealth -= damage;
+        PlayerHUD.Instance.SetHealthPercent(CurrentHealth / Health);
+
+        if (CurrentHealth <= 0)
         {
             Destroy(gameObject);
         }
@@ -72,7 +75,8 @@ public class PlayerController : MonoBehaviour
         Attacking = GetComponent<IAttacking>();
         Attacking.AssignAttackEvent(OnAttackEvent);
         SetWeaponData(StartingWeapon);
-        //Attacking.AssignWeaponDataUpdate(WeaponDataUpdate);
+
+        CurrentHealth = Health;
     }
 
     private void OnDestroy()

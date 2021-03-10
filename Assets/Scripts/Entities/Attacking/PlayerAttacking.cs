@@ -104,6 +104,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     {
         WeaponRenderer.sprite = CurrentWeapon.Sprite;
         FirePoint.localPosition = CurrentWeapon.FirePoint;
+        PlayerHUD.Instance.UpdateAmmoType(CurrentWeapon.AmmoType);
     }
 
     public void AddAmmo(int ammo, AmmoType ammoType)

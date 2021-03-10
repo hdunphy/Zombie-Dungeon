@@ -125,9 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb42b6989f0293648934821ea06ec2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmmoType: 0
   MinDrop: 10
   MaxDrop: 50
+  Bullet_L: {fileID: 2586806477627836222}
+  Bullet_M: {fileID: 1251216365785626600}
+  Bullet_R: {fileID: 1877960707728856792}
 --- !u!1 &1463727845010351173
 GameObject:
   m_ObjectHideFlags: 0
