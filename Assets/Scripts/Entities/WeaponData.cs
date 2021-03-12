@@ -6,6 +6,7 @@ public enum AmmoType { Small, Medium, Shotgun }
 public class WeaponData : ScriptableObject
 {
     public Sprite Sprite;
+    public Sprite Icon;
     public float Damage;
     public float FireRate;
     public float WeaponDistance;

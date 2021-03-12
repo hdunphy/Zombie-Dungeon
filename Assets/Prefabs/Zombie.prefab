@@ -202,10 +202,10 @@ MonoBehaviour:
   Health: 100
   AttackRange: 0.6
   AttackSpeed: 0.5
-  Damage: 50
+  Damage: 25
   AmmoDropChance: 0.33333
   AmmoDrop: {fileID: 65137689049169370, guid: a6a1912b22a84d44389b04f63e148175, type: 3}
-  WeaponDropChance: 1
+  WeaponDropChance: 0.2
   WeaponDrop: {fileID: 2088819935979949940, guid: 9a62c02494637ab4e9b32c54cb5a3199, type: 3}
 --- !u!114 &-8411718611757270941
 MonoBehaviour:

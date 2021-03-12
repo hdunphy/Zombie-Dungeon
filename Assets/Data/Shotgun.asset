@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   Sprite: {fileID: 6407226241554960098, guid: 19815367f1fbef64080189068fac44aa, type: 3}
+  Icon: {fileID: -2297682244154817628, guid: e8197916ea54f3e4f813f523ed77885a, type: 3}
   Damage: 100
   FireRate: 0.5
   WeaponDistance: 3

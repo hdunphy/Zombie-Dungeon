@@ -11,6 +11,9 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Image AmmoRenderer;
     [SerializeField] private List<Sprite> AmmoSprites;
 
+    [Header("Guns")]
+    [SerializeField] private Image SelectedGun;
+
     [Header("Health")]
     [SerializeField] private RectTransform HealthBarTransform;
 
@@ -47,6 +50,12 @@ public class PlayerHUD : MonoBehaviour
     public void SetHealthPercent(float percent)
     {
         percent = Mathf.Clamp(percent, 0, 1);
-        HealthBarTransform.localScale = new Vector3(percent, 1);
+        LeanTween.scale(HealthBarTransform, new Vector3(percent, 1), .5f);
+        //HealthBarTransform.localScale = new Vector3(percent, 1);
+    }
+
+    public void SetSelectedGun(Sprite sprite)
+    {
+        SelectedGun.sprite = sprite;
     }
 }

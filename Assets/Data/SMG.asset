@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SMG
   m_EditorClassIdentifier: 
   Sprite: {fileID: 6820856509940793013, guid: 19815367f1fbef64080189068fac44aa, type: 3}
+  Icon: {fileID: 7316689872106831293, guid: e8197916ea54f3e4f813f523ed77885a, type: 3}
   Damage: 15
   FireRate: 0.1
   WeaponDistance: 8

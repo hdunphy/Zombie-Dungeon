@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   Sprite: {fileID: 7144583015058605669, guid: 19815367f1fbef64080189068fac44aa, type: 3}
+  Icon: {fileID: 279470361204126389, guid: e8197916ea54f3e4f813f523ed77885a, type: 3}
   Damage: 40
   FireRate: 0.3
   WeaponDistance: 15

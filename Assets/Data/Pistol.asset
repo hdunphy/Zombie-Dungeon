@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   Sprite: {fileID: -4254059877319897387, guid: 19815367f1fbef64080189068fac44aa, type: 3}
+  Icon: {fileID: 484636408423534386, guid: e8197916ea54f3e4f813f523ed77885a, type: 3}
   Damage: 25
   FireRate: 0.4
   WeaponDistance: 10
