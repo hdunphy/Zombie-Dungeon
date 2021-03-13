@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 [RequireComponent(typeof(IAttacking))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private Animator Animator;
     [SerializeField] private Movement Movement;

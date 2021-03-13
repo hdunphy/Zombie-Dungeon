@@ -409,63 +409,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &578609143
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 578609145}
-  - component: {fileID: 578609144}
-  m_Layer: 0
-  m_Name: Enemy Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &578609144
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578609143}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
-  m_EdgeRadius: 0
---- !u!4 &578609145
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578609143}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &598523970
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,8 +916,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1559277935}
+  - component: {fileID: 1559277938}
   - component: {fileID: 1559277934}
   - component: {fileID: 1559277936}
+  - component: {fileID: 1559277937}
   m_Layer: 0
   m_Name: Level Generator
   m_TagString: Untagged
@@ -1003,6 +948,10 @@ MonoBehaviour:
   DestroyWalkerChance: 0.1
   WalkerChangeDirectionChance: 0.33
   EnemyStartNumber: 5
+  LevelPrefabs:
+  - Instances: 2
+    RequiredSpace: 1
+    SpaceType: 5
   ShowLevelCreation: 0
 --- !u!4 &1559277935
 Transform:
@@ -1034,6 +983,41 @@ MonoBehaviour:
   Floor: {fileID: 4575750736522725008, guid: e42fa1fea078df84a83e9351c972e122, type: 3}
   PlayerPrefab: {fileID: 5737754977094310371, guid: d98ec3e1eeb308c449a55a8febfec5ca, type: 3}
   EnemyPrefab: {fileID: 6183675079140182921, guid: ba26815a3ca6308488e81473d206ee2a, type: 3}
+  SpanwerPrefab: {fileID: 2458464313150876365, guid: 9f56fd74e6a847047856e64eb5713cc8, type: 3}
+--- !u!114 &1559277937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559277933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0ce97b0031bf44b9a4a8febe3d8677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1559277938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559277933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd9df20ca9effa438fbf59e0ff87121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnerRadius: 1
+  EnemyStartNumber: 1
+  EnemyStartNumberLevelIncrease: 0
+  SpawnerStartNumber: 1
+  SpawnerStartNumberLevelIncrease: 0
+  SpawnerRate: 5
+  SpawnerRateLevelIncrease: 0
+  EnemyLimit: 1
+  EnemyLimitLevelIncrease: 0
+  LevelGenerator: {fileID: 1559277934}
 --- !u!1 &1703413866
 GameObject:
   m_ObjectHideFlags: 0

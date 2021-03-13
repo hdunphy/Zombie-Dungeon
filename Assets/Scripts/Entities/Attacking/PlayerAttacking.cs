@@ -50,9 +50,9 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
         if (hitPoint)
         {
-            if (hitPoint.transform.TryGetComponent(out EnemyController enemy))
+            if (hitPoint.transform.TryGetComponent(out ITakeDamage damageable) && !hitPoint.transform.TryGetComponent(out PlayerController _))
             {
-                enemy.TakeDamage(CurrentWeapon.Damage);
+                damageable.TakeDamage(CurrentWeapon.Damage);
             }
 
             FireLine.SetPosition(0, FirePoint.position);

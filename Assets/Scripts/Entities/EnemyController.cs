@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(IPathFinding))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private Animator Animator;
     [SerializeField] private Movement Movement;
@@ -27,6 +27,13 @@ public class EnemyController : MonoBehaviour
     {
         PathFinding = GetComponent<IPathFinding>();
         Player = FindObjectOfType<PlayerController>();
+
+        LevelRules.Instance.AddEnemy();
+    }
+
+    private void OnDestroy()
+    {
+        LevelRules.Instance.KilledEnemy(1);
     }
 
     private void FixedUpdate()

@@ -23,6 +23,7 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Entities")]
     [SerializeField] private int EnemyStartNumber;
+    [SerializeField] private List<LevelPrefab> LevelPrefabs;
 
     [Header("Debug")]
     [SerializeField] private bool ShowLevelCreation;
@@ -36,25 +37,47 @@ public class LevelGenerator : MonoBehaviour
     private IAddSpaceToWorld AddSpaceImplementation;
     private List<Walker> Walkers;
     private GridSpace[,] LevelGrid;
-    private int FloorCount; 
+    private int FloorCount;
 
     private readonly List<Vector2Int> Directions = new List<Vector2Int>() { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
 
-    // Start is called before the first frame update
-    void Start()
+    //private void Start()
+    //{
+    //    SetUp();
+    //    if (ShowLevelCreation)
+    //    {
+    //        StartCoroutine(StartWalkersCoroutine());
+    //    }
+    //    else
+    //    {
+    //        StartWalkers();
+    //        PostFloorCreationJobs();
+    //    }
+    //}
+
+    public void StartLevelCreation()
     {
         SetUp();
-        if (ShowLevelCreation)
-        {
-            StartCoroutine(StartWalkersCoroutine());
-        }
-        else
-        {
-            StartWalkers();
-            AddWalls();
-            AddPlayer();
-            AddEnemies();
-        }
+        StartWalkers();
+        PostFloorCreationJobs();
+    }
+
+    public void StartLevelCreation(int enemyStartNumber, int spawnerNumber)
+    {
+        EnemyStartNumber = enemyStartNumber;
+
+        LevelPrefabs.Clear();
+        LevelPrefabs.Add(new LevelPrefab { Instances = spawnerNumber, RequiredSpace = 1, SpaceType = GridSpace.SPAWNER });
+
+        StartLevelCreation();
+    }
+
+    private void PostFloorCreationJobs()
+    {
+        AddWalls();
+        AddPlayer();
+        AddEnemies();
+        AddLevelPrefabs();
     }
 
     private void SetUp()
@@ -163,19 +186,17 @@ public class LevelGenerator : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
 
-        AddWalls();
-        AddPlayer();
-        AddEnemies();
+        PostFloorCreationJobs();
     }
 
     private void AddWalls()
     {
-        for(int i = 0; i < Width; i++)
+        for (int i = 0; i < Width; i++)
         {
-            for(int j = 0; j < Height; j++)
+            for (int j = 0; j < Height; j++)
             {
                 GridSpace _space = LevelGrid[i, j];
-                if(_space == GridSpace.EMPTY)
+                if (_space == GridSpace.EMPTY)
                 {
                     CheckToAddWall(i, j);
                 }
@@ -190,9 +211,18 @@ public class LevelGenerator : MonoBehaviour
 
     private void AddEnemies()
     {
-        for(int i = 0; i < EnemyStartNumber; i++)
+        for (int i = 0; i < EnemyStartNumber; i++)
         {
             AddSpaceToGrid(GridSpace.ENEMY, GetRandomOpenFloorSpace());
+        }
+    }
+
+    private void AddLevelPrefabs()
+    {
+        foreach (LevelPrefab _levelPrefab in LevelPrefabs)
+        {
+            for (int i = 0; i < _levelPrefab.Instances; i++)
+                AddSpaceToGrid(_levelPrefab.SpaceType, GetRandomOpenFloorSpace(_levelPrefab.RequiredSpace, 0));
         }
     }
 
@@ -202,21 +232,21 @@ public class LevelGenerator : MonoBehaviour
         bool addWall = false;
         int numberOfAdjacentFloors = 0;
 
-        foreach(Vector2Int dir in Directions)
+        foreach (Vector2Int dir in Directions)
         {
             Vector2Int adjacentPos = _position + dir;
-            if(IsVectorInGrid(adjacentPos) && LevelGrid[adjacentPos.x, adjacentPos.y] == GridSpace.FLOOR)
+            if (IsVectorInGrid(adjacentPos) && LevelGrid[adjacentPos.x, adjacentPos.y] == GridSpace.FLOOR)
             {
                 addWall = true;
                 numberOfAdjacentFloors++;
             }
         }
 
-        if(numberOfAdjacentFloors > 3)
+        if (numberOfAdjacentFloors > 3)
         {
             AddSpaceToGrid(GridSpace.FLOOR, _position);
         }
-        else if(addWall)
+        else if (addWall)
         {
             AddSpaceToGrid(GridSpace.WALL, _position);
         }
@@ -227,7 +257,7 @@ public class LevelGenerator : MonoBehaviour
         LevelGrid[gridPosition.x, gridPosition.y] = gridSpace;
         Vector2 _position = GridPositionToWalkerPosition(gridPosition);
 
-        if(GridSpace.FLOOR == gridSpace)
+        if (GridSpace.FLOOR == gridSpace)
             FloorCount++;
         AddSpaceImplementation.AddSpaceToWorld(gridSpace, _position);
     }
@@ -250,15 +280,46 @@ public class LevelGenerator : MonoBehaviour
 
     private Vector2Int GetRandomOpenFloorSpace(int count = 0)
     {
-        if(count > 10)
+        if (count > 10)
         {
             return Vector2Int.RoundToInt(new Vector2(Width / 2f, Height / 2f));
         }
 
         Vector2Int space = GetRandomPositionInGrid();
-        if(LevelGrid[space.x, space.y] != GridSpace.FLOOR)
+        if (LevelGrid[space.x, space.y] != GridSpace.FLOOR)
         {
             space = GetRandomOpenFloorSpace(count + 1);
+        }
+        return space;
+    }
+
+    private Vector2Int GetRandomOpenFloorSpace(int gridSpaceNeeded, int count = 0)
+    {
+        if (count > 10)
+        {
+            return Vector2Int.RoundToInt(new Vector2(Width / 2f, Height / 2f));
+        }
+
+        Vector2Int space = GetRandomPositionInGrid();
+
+        bool containsNonFloor = false;
+        for (int i = space.x - gridSpaceNeeded; i <= space.x + gridSpaceNeeded; i++)
+        {
+            for (int j = space.y - gridSpaceNeeded; j <= space.y + gridSpaceNeeded; j++)
+            {
+                Vector2Int _adjSpace = new Vector2Int(i, j);
+                if (!IsVectorInGrid_Floor(_adjSpace) || LevelGrid[i, j] != GridSpace.FLOOR)
+                {
+                    containsNonFloor = true;
+                    break;
+                }
+            }
+            if (containsNonFloor)
+                break;
+        }
+        if (containsNonFloor)
+        {
+            space = GetRandomOpenFloorSpace(gridSpaceNeeded, count + 1);
         }
         return space;
     }
@@ -310,7 +371,7 @@ public class LevelGenerator : MonoBehaviour
     }
     #endregion
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (Application.isPlaying)
         {
@@ -322,4 +383,12 @@ public class LevelGenerator : MonoBehaviour
         }
 
     }
+}
+
+[Serializable]
+public class LevelPrefab
+{
+    public int Instances;
+    public int RequiredSpace;
+    public GridSpace SpaceType;
 }

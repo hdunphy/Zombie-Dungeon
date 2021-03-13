@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public enum GridSpace { EMPTY, FLOOR, WALL, PLAYER, ENEMY }
+public enum GridSpace { EMPTY, FLOOR, WALL, PLAYER, ENEMY, SPAWNER }
 
 public interface IAddSpaceToWorld
 {
