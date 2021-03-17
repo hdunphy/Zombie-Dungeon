@@ -85,11 +85,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     public void SetWeaponData(WeaponData data)
     {
         int index = weapons.FindIndex(x => x.Data == data);
-        if(index >= 0)
-        {
-            currentWeaponIndex = index;
-        }
-        else
+        if(index < 0)
         {
             weapons.Add(new WeaponObject(data, data.ClipSize));
             currentWeaponIndex = weapons.Count - 1;

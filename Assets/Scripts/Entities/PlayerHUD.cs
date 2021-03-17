@@ -17,6 +17,9 @@ public class PlayerHUD : MonoBehaviour
     [Header("Health")]
     [SerializeField] private RectTransform HealthBarTransform;
 
+    [Header("Waves")]
+    [SerializeField] private TMP_Text WaveText;
+
 
     public static PlayerHUD Instance;
 
@@ -57,5 +60,10 @@ public class PlayerHUD : MonoBehaviour
     public void SetSelectedGun(Sprite sprite)
     {
         SelectedGun.sprite = sprite;
+    }
+
+    public void SetWaveNumber(int waveNumber)
+    {
+        WaveText.text = $"Wave {waveNumber}";
     }
 }

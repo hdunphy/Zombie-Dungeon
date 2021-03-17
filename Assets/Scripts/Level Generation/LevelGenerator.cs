@@ -72,6 +72,39 @@ public class LevelGenerator : MonoBehaviour
         StartLevelCreation();
     }
 
+    public void NextLevel(int enemyStartNumber, int spawnerNumber, Vector2 playerWorldSpace)
+    {
+        EnemyStartNumber = enemyStartNumber;
+
+        LevelPrefabs.Clear();
+        LevelPrefabs.Add(new LevelPrefab { Instances = spawnerNumber, RequiredSpace = 1, SpaceType = GridSpace.SPAWNER });
+
+        ResetNonFloorWallTiles();
+
+        //Update Player Position
+        Vector2Int playerGridSpace = WalkerPositionToGridPosition(playerWorldSpace);
+        LevelGrid[playerGridSpace.x, playerGridSpace.y] = GridSpace.PLAYER;
+
+
+        AddEnemies();
+        AddLevelPrefabs();
+    }
+
+    private void ResetNonFloorWallTiles()
+    {
+        for(int i = 0; i < Width; i++)
+        {
+            for(int j = 0; j < Height; j++)
+            {
+                GridSpace gridSpace = LevelGrid[i, j];
+                if (gridSpace != GridSpace.EMPTY && gridSpace != GridSpace.FLOOR && gridSpace != GridSpace.WALL)
+                {
+                    LevelGrid[i, j] = GridSpace.FLOOR;
+                }
+            }
+        }
+    }
+
     private void PostFloorCreationJobs()
     {
         AddWalls();

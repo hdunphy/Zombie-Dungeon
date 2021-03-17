@@ -16,6 +16,8 @@ public class LevelRules : MonoBehaviour
     private int EnemyCount;
     private int KillCount;
 
+    public Action<bool> EndLevel;
+
     private void Awake()
     {
         if (Instance == null)
@@ -59,7 +61,7 @@ public class LevelRules : MonoBehaviour
         //Debug.Log($"Enemy Count {EnemyCount}, Spawner Count {NumberOfSpawners}");
         if(NumberOfSpawners + EnemyCount <= 0)
         {
-            Debug.Log("WIN");
+            EndLevel?.Invoke(true);
         }
     }
 
