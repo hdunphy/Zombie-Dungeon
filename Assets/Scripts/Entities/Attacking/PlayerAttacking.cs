@@ -9,6 +9,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     [SerializeField] private SpriteRenderer WeaponRenderer;
     [SerializeField] private Transform FirePoint;
     [SerializeField] private int NewWeaponClipAmount;
+    [SerializeField] private AudioSource ShotAudio;
 
     private bool isAttacking;
     private float nextFire;
@@ -47,6 +48,8 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     private IEnumerator Shoot()
     {
         RaycastHit2D hitPoint = Physics2D.Raycast(FirePoint.position, FirePoint.up, CurrentWeapon.WeaponDistance);
+
+        ShotAudio.Play();
 
         if (hitPoint)
         {
@@ -98,6 +101,8 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
     private void UpdateWeapon()
     {
+        ShotAudio.clip = CurrentWeapon.ShotAudioClip;
+
         WeaponRenderer.sprite = CurrentWeapon.Sprite;
         FirePoint.localPosition = CurrentWeapon.FirePoint;
         PlayerHUD.Instance.UpdateAmmoType(CurrentWeapon.AmmoType);
@@ -112,12 +117,14 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
         }
 
         heldAmmo[ammoType].AddAmmo(ammo);
+        AudioManager.Instance.PlaySound("PickupAmmo");
         UpdateAmmoHUD();
     }
 
     public void Reload()
     {
         weapons[currentWeaponIndex].AmmoInClip = heldAmmo[CurrentWeapon.AmmoType].Reload(CurrentWeapon.ClipSize, CurrentAmmo);
+        AudioManager.Instance.PlaySound("Reload");
         UpdateAmmoHUD();
     }
 
@@ -130,6 +137,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     {
         currentWeaponIndex = ++currentWeaponIndex >= weapons.Count ? 0 : currentWeaponIndex;
 
+        AudioManager.Instance.PlaySound("CycleWeapon");
         UpdateWeapon();
         UpdateAmmoHUD();
     }

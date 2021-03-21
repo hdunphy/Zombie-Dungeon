@@ -31,6 +31,8 @@ public class WeaponDrop : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<PlayerController>().SetWeaponData(weapon);
+            AudioManager.Instance.PlaySound("PickupWeapon");
+
             Destroy(gameObject);
         }
     }
