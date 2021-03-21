@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 6820856509940793013, guid: 19815367f1fbef64080189068fac44aa, type: 3}
   Icon: {fileID: 7316689872106831293, guid: e8197916ea54f3e4f813f523ed77885a, type: 3}
+  ShotAudioClip: {fileID: 8300000, guid: b33e2cff5225f4437a43a11d35763d46, type: 3}
+  name: SMG
   Damage: 15
   FireRate: 0.1
   WeaponDistance: 8
