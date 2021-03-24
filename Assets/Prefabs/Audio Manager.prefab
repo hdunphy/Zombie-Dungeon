@@ -70,17 +70,25 @@ MonoBehaviour:
     AudioSource: {fileID: 0}
   - name: PickupWeapon
     Clip: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
-    Volume: 1
+    Volume: 0.75
     Pitch: 0.52
     Loop: 0
     PlayOnStart: 0
     AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
     AudioSource: {fileID: 0}
-  - name: Music
-    Clip: {fileID: 8300000, guid: 3e793a7a35c5a4164848df73a644d1e3, type: 3}
-    Volume: 1
+  - name: Title Music
+    Clip: {fileID: 8300000, guid: 3d48ccdcd960b43cf88722b46569106c, type: 3}
+    Volume: 0.8
     Pitch: 0.65
     Loop: 1
     PlayOnStart: 1
+    AudioMixerGroup: {fileID: -4973638661359391906, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Music
+    Clip: {fileID: 8300000, guid: 3e793a7a35c5a4164848df73a644d1e3, type: 3}
+    Volume: 1
+    Pitch: 1.5
+    Loop: 1
+    PlayOnStart: 0
     AudioMixerGroup: {fileID: -4973638661359391906, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
     AudioSource: {fileID: 0}

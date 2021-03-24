@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public RectTransform SettingsPanel;
     public AudioMixer AudioMixer;
     public TMPro.TMP_Dropdown ResolutionDropdown;
     public Toggle FullScreenToggle;
@@ -16,16 +17,23 @@ public class SettingsMenu : MonoBehaviour
     public Slider SoundVolSlider;
 
     private int qualitySettings;
+
+
     private int height;
     private int width;
     private bool isFullScreen;
     private float musicVolume;
     private float soundVolume;
 
+    private float animationSpeed;
+    private float offscreenPosition;
     List<Resolution> resolutions;
 
     private void Start()
     {
+        offscreenPosition = SettingsPanel.rect.width;
+        SettingsPanel.anchoredPosition = new Vector2(offscreenPosition, 0);
+
         LoadSettings();
 
         resolutions = Screen.resolutions.Distinct().ToList();
@@ -51,6 +59,22 @@ public class SettingsMenu : MonoBehaviour
 
         ResolutionDropdown.AddOptions(options);
         ResolutionDropdown.value = currentindex;
+    }
+
+    public void SetAnimationSpeed(float _animationSpeed)
+    {
+        animationSpeed = _animationSpeed;
+    }
+
+    public void AnimateIn()
+    {
+        LeanTween.moveX(SettingsPanel, 0, animationSpeed).setEase(LeanTweenType.easeOutQuad);
+    }
+
+    public void OnBackPressed()
+    {
+        LeanTween.moveX(SettingsPanel, offscreenPosition, animationSpeed).setEase(LeanTweenType.easeOutQuad);
+        FindObjectOfType<MainMenu>().AnimateIn();
     }
 
     private void OnDestroy()
@@ -86,11 +110,6 @@ public class SettingsMenu : MonoBehaviour
     {
         Screen.fullScreen = _isFullscreen;
         isFullScreen = _isFullscreen;
-    }
-
-    public void OnBackPressed()
-    {
-
     }
 
     private void SaveSettings()
