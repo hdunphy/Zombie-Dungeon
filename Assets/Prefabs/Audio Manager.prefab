@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &922268809765007474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 922268809765007476}
+  - component: {fileID: 922268809765007475}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &922268809765007476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922268809765007474}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &922268809765007475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922268809765007474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ab61aa44c9a6d48a656eb84c3febbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - name: Reload
+    Clip: {fileID: 8300000, guid: 9158afb6966d445db9caf1dccf7acbcc, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: CycleWeapon
+    Clip: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: PickupAmmo
+    Clip: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+    Volume: 1
+    Pitch: 2
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: PickupWeapon
+    Clip: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+    Volume: 1
+    Pitch: 0.52
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Music
+    Clip: {fileID: 8300000, guid: 3e793a7a35c5a4164848df73a644d1e3, type: 3}
+    Volume: 1
+    Pitch: 0.65
+    Loop: 1
+    PlayOnStart: 1
+    AudioMixerGroup: {fileID: -4973638661359391906, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}

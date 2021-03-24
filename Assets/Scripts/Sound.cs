@@ -18,6 +18,8 @@ public class Sound
 
     public bool PlayOnStart;
 
+    public AudioMixerGroup AudioMixerGroup;
+
     [HideInInspector]
     public AudioSource AudioSource;
 }
