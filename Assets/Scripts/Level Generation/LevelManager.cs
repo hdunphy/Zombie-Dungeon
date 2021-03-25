@@ -27,14 +27,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LevelGenerator LevelGenerator;
 
     private float _enemyStartNumber, _spawnerStartNumber, _spawnerRate, _enemyLimit;
-    private int waveNumber;
 
     // Start is called before the first frame update
     void Start()
     {
         LevelRules.Instance.EndLevel += EndLevel;
 
-        waveNumber = 0;
         _enemyLimit = EnemyLimit;
         _enemyStartNumber = EnemyStartNumber;
         _spawnerRate = SpawnerRate;
@@ -42,7 +40,6 @@ public class LevelManager : MonoBehaviour
 
         LevelRules.Instance.SetSpawnerData(SpawnerRate, SpawnerRadius, EnemyLimit, SpawnerStartNumber);
         LevelGenerator.StartLevelCreation(EnemyStartNumber, SpawnerStartNumber);
-        PlayerHUD.Instance.SetWaveNumber(waveNumber);
 
         StartCoroutine(StartSpawners());
     }
@@ -72,17 +69,16 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator NextLevel()
     {
-        PlayerHUD.Instance.SetWaveNumber(++waveNumber);
         yield return new WaitForSeconds(3f);
 
         _enemyStartNumber += _enemyStartNumber * EnemyStartNumberLevelIncrease;
         _enemyLimit += _enemyLimit * EnemyLimitLevelIncrease;
-        _spawnerRate += _spawnerRate * SpawnerRateLevelIncrease;
+        _spawnerRate -= _spawnerRate * SpawnerRateLevelIncrease;
         _spawnerStartNumber += _spawnerStartNumber * SpawnerStartNumberLevelIncrease;
 
         EnemyStartNumber = Mathf.RoundToInt(_enemyStartNumber);
         EnemyLimit = Mathf.RoundToInt(_enemyLimit);
-        SpawnerRate = Mathf.RoundToInt(_spawnerRate);
+        SpawnerRate = _spawnerRate;
         SpawnerStartNumber = Mathf.RoundToInt(_spawnerStartNumber);
 
 

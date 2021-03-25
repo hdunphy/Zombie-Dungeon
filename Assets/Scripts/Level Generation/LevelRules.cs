@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class LevelRules : MonoBehaviour
 {
+    [SerializeField] private float WaveScoreMultiplier;
+    [SerializeField] private float EnemyScoreMultiplier;
+    [SerializeField] private float SpawnerScoreMultiplier;
+
 
     public static LevelRules Instance;
 
@@ -15,6 +19,8 @@ public class LevelRules : MonoBehaviour
 
     private int EnemyCount;
     private int KillCount;
+    private int waveNumber;
+    private float score;
 
     public Action<bool> EndLevel;
 
@@ -30,6 +36,12 @@ public class LevelRules : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        waveNumber = 1;
+        PlayerHUD.Instance.SetWaveNumber(waveNumber);
+    }
+
     public void SetSpawnerData(float _spawnRate, int _spawnRadius, int _enemyLimit, int _numberOfSpawners)
     {
         SpawnRate = _spawnRate;
@@ -42,7 +54,14 @@ public class LevelRules : MonoBehaviour
     {
         EnemyCount -= enemies;
         KillCount += enemies;
+        CalculateScore(enemies, EnemyScoreMultiplier);
         CheckWinCondition();
+    }
+
+    private void CalculateScore(int count, float multiplier)
+    {
+        score += (count *  multiplier) * WaveScoreMultiplier * waveNumber;
+        PlayerHUD.Instance.SetScore(Mathf.RoundToInt(score));
     }
 
     public void AddEnemy()
@@ -53,6 +72,7 @@ public class LevelRules : MonoBehaviour
     public void RemoveSpawner()
     {
         NumberOfSpawners--;
+        CalculateScore(1, SpawnerScoreMultiplier);
         CheckWinCondition();
     }
 
@@ -61,6 +81,7 @@ public class LevelRules : MonoBehaviour
         //Debug.Log($"Enemy Count {EnemyCount}, Spawner Count {NumberOfSpawners}");
         if(NumberOfSpawners + EnemyCount <= 0)
         {
+            PlayerHUD.Instance.SetWaveNumber(++waveNumber);
             EndLevel?.Invoke(true);
         }
     }

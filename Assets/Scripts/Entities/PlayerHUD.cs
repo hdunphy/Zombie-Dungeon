@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -17,8 +18,9 @@ public class PlayerHUD : MonoBehaviour
     [Header("Health")]
     [SerializeField] private RectTransform HealthBarTransform;
 
-    [Header("Waves")]
+    [Header("Info")]
     [SerializeField] private TMP_Text WaveText;
+    [SerializeField] private TMP_Text ScoreText;
 
 
     public static PlayerHUD Instance;
@@ -60,6 +62,11 @@ public class PlayerHUD : MonoBehaviour
     public void SetSelectedGun(Sprite sprite)
     {
         SelectedGun.sprite = sprite;
+    }
+
+    public void SetScore(int score)
+    {
+        ScoreText.text = $"Score: {score}";
     }
 
     public void SetWaveNumber(int waveNumber)

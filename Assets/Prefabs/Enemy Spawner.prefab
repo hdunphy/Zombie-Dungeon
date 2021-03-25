@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2458464313150876355}
   - component: {fileID: 2458464313150876354}
   - component: {fileID: 5739823710243302873}
+  - component: {fileID: 9060741213527251885}
   m_Layer: 0
   m_Name: Enemy Spawner
   m_TagString: Untagged
@@ -73,6 +74,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 6183675079140182921, guid: ba26815a3ca6308488e81473d206ee2a, type: 3}
   Health: 50
+--- !u!95 &9060741213527251885
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458464313150876365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4066373778084156387
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +104,7 @@ GameObject:
   - component: {fileID: 6406968712274313595}
   - component: {fileID: 2003201345196412374}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,8 +164,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fdf8d9fef041fbd4d8b32de9279bd7cd, type: 3}
-  m_Color: {r: 0.754717, g: 0.535238, b: 0.16019939, a: 1}
+  m_Sprite: {fileID: 6810463077589642200, guid: 9401a062d7a44074d8ae694fca58e80b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
