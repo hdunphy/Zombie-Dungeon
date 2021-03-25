@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour, ITakeDamage
 
         if (CurrentHealth <= 0)
         {
+            LevelRules.Instance.PlayerDeath();
+            AudioManager.Instance.PlaySound("Player Died");
             Destroy(gameObject);
         }
     }

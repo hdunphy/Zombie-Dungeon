@@ -92,3 +92,19 @@ MonoBehaviour:
     PlayOnStart: 0
     AudioMixerGroup: {fileID: -4973638661359391906, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
     AudioSource: {fileID: 0}
+  - name: Player Died
+    Clip: {fileID: 8300000, guid: df729d213c4be44a9b55cd109f5cd4f9, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Next Level
+    Clip: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}

@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
 
 
     [SerializeField] private LevelGenerator LevelGenerator;
+    [SerializeField] private OnDeathPopup OnDeathPopup;
 
     private float _enemyStartNumber, _spawnerStartNumber, _spawnerRate, _enemyLimit;
 
@@ -63,7 +64,12 @@ public class LevelManager : MonoBehaviour
     {
         if (playerWin)
         {
+            AudioManager.Instance.PlaySound("NextLevel");
             StartCoroutine(NextLevel());
+        }
+        else
+        {
+            OnDeathPopup.PlayerDied();
         }
     }
 
