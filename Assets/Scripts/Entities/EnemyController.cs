@@ -97,6 +97,8 @@ public class EnemyController : MonoBehaviour, ITakeDamage
         Health -= damage;
         if (Health <= 0)
         {
+            AudioManager.Instance.PlaySound("Zombie Death");
+
             if (UnityEngine.Random.value < AmmoDropChance)
             {
                 Instantiate(AmmoDrop, transform.position, Quaternion.identity);

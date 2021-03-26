@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
     {
         if (playerWin)
         {
-            AudioManager.Instance.PlaySound("NextLevel");
+            AudioManager.Instance.PlaySound("End of Wave");
             StartCoroutine(NextLevel());
         }
         else
@@ -80,6 +80,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator NextLevel()
     {
         yield return new WaitForSeconds(3f);
+        AudioManager.Instance.PlaySound("Next Wave");
 
         _enemyStartNumber += _enemyStartNumber * EnemyStartNumberLevelIncrease;
         _enemyLimit += _enemyLimit * EnemyLimitLevelIncrease;
