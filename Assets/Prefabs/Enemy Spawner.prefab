@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2458464313150876355}
   - component: {fileID: 2458464313150876354}
   - component: {fileID: 5739823710243302873}
+  - component: {fileID: 4350098177159365505}
   - component: {fileID: 9060741213527251885}
   m_Layer: 0
   m_Name: Enemy Spawner
@@ -44,7 +45,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -74,6 +75,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 6183675079140182921, guid: ba26815a3ca6308488e81473d206ee2a, type: 3}
   Health: 50
+  EntityDropTable: {fileID: 4350098177159365505}
+--- !u!114 &4350098177159365505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458464313150876365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea1d0b3109f25e4eaba635b080a95d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - RollChance: 0.4
+    IsEmpty: 0
+    DropObject: {fileID: 1422420359332028920, guid: 42baec89015672c4f8017e2945ae5bdb, type: 3}
+  - RollChance: 0.6
+    IsEmpty: 0
+    DropObject: {fileID: 2088819935979949940, guid: 9a62c02494637ab4e9b32c54cb5a3199, type: 3}
 --- !u!95 &9060741213527251885
 Animator:
   serializedVersion: 3
@@ -119,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 4066373778084156387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2458464313150876355}
   m_RootOrder: 0

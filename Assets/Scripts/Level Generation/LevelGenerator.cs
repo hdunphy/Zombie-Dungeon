@@ -116,6 +116,7 @@ public class LevelGenerator : MonoBehaviour
     private void SetUp()
     {
         AddSpaceImplementation = GetComponent<IAddSpaceToWorld>();
+        AddSpaceImplementation.InitializeGridConversion(GridToWorldConversion);
 
         FloorCount = 0;
         LevelGrid = new GridSpace[Width, Height];
@@ -235,6 +236,15 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
+
+        StartCoroutine(FinishedBuildingLevel());
+    }
+
+    private IEnumerator FinishedBuildingLevel()
+    {
+        yield return new WaitForEndOfFrame();
+
+        AddSpaceImplementation.SetUpComplete();
     }
 
     private void AddPlayer()

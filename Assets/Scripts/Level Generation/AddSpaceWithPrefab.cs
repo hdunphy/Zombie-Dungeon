@@ -39,4 +39,14 @@ public class AddSpaceWithPrefab : MonoBehaviour, IAddSpaceToWorld
 
         Instantiate(prefab, worldPosition, Quaternion.identity);
     }
+
+    public void InitializeGridConversion(int GridToWorldConversion)
+    {
+
+    }
+
+    public void SetUpComplete()
+    {
+
+    }
 }

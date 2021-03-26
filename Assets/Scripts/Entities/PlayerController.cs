@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private Animator Animator;
     [SerializeField] private Movement Movement;
+
     [SerializeField] private float Health;
     [SerializeField] private WeaponData StartingWeapon;
 
@@ -18,6 +19,39 @@ public class PlayerController : MonoBehaviour, ITakeDamage
     private float CurrentHealth;
 
     private const float FireAnimationTime = .183f;
+
+    private void Start()
+    {
+        Attacking = GetComponent<IAttacking>();
+        Attacking.AssignAttackEvent(OnAttackEvent);
+        SetWeaponData(StartingWeapon);
+
+        CurrentHealth = Health;
+    }
+
+    private void OnDestroy()
+    {
+        Attacking.UnAssignAttackEvent(OnAttackEvent);
+    }
+
+    private void Update()
+    {
+        bool isMoving = false;
+        if (!Attacking.GetIsAttacking())
+        {
+            isMoving = inputVector != Vector2.zero;
+            Movement.SetCanMove(true);
+            //Rb.velocity = (inputVector * MoveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Movement.SetCanMove(false);
+            //Rb.velocity = Vector2.zero;
+        }
+
+        Animator.SetBool("IsMoving", isMoving);
+        Attacking.ShowWeapon(!isMoving);
+    }
 
     public void OnMove(CallbackContext callback)
     {
@@ -67,28 +101,16 @@ public class PlayerController : MonoBehaviour, ITakeDamage
         }
     }
 
+    public void AddHealth(float healthAmount)
+    {
+        AudioManager.Instance.PlaySound("Health Pickup");
+        CurrentHealth = Mathf.Clamp(CurrentHealth + healthAmount, 0, Health);
+        PlayerHUD.Instance.SetHealthPercent(CurrentHealth / Health);
+    }
+
     public void AddAmmo(int ammo, AmmoType ammoType)
     {
         Attacking.AddAmmo(ammo, ammoType);
-    }
-
-    private void Start()
-    {
-        Attacking = GetComponent<IAttacking>();
-        Attacking.AssignAttackEvent(OnAttackEvent);
-        SetWeaponData(StartingWeapon);
-
-        CurrentHealth = Health;
-    }
-
-    private void OnDestroy()
-    {
-        Attacking.UnAssignAttackEvent(OnAttackEvent);
-    }
-
-    private void OnAttackEvent()
-    {
-        Animator.SetTrigger("Shoot");
     }
 
     public void SetWeaponData(WeaponData data)
@@ -97,22 +119,8 @@ public class PlayerController : MonoBehaviour, ITakeDamage
         Animator.SetFloat("FireRate", data.FireRate / FireAnimationTime);
     }
 
-    private void Update()
+    private void OnAttackEvent()
     {
-        bool isMoving = false;
-        if (!Attacking.GetIsAttacking())
-        {
-            isMoving = inputVector != Vector2.zero;
-            Movement.SetCanMove(true);
-            //Rb.velocity = (inputVector * MoveSpeed * Time.deltaTime);
-        }
-        else
-        {
-            Movement.SetCanMove(false);
-            //Rb.velocity = Vector2.zero;
-        }
-
-        Animator.SetBool("IsMoving", isMoving);
-        Attacking.ShowWeapon(!isMoving);
+        Animator.SetTrigger("Shoot");
     }
 }

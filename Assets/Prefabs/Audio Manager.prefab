@@ -108,3 +108,43 @@ MonoBehaviour:
     PlayOnStart: 0
     AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
     AudioSource: {fileID: 0}
+  - name: Zombie Bite
+    Clip: {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}
+    Volume: 0.788
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Bullet Miss
+    Clip: {fileID: 8300000, guid: 75adfe9a619833445a701305b983e548, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Bullet Hit
+    Clip: {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
+    Volume: 0.864
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Spawner Death
+    Clip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Health Pickup
+    Clip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}

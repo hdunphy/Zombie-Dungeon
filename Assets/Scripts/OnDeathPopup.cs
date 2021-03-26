@@ -35,4 +35,9 @@ public class OnDeathPopup : MonoBehaviour
         AudioManager.Instance.PlaySound("Title Music");
         SceneManager.LoadScene("Menu");
     }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

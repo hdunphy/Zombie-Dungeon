@@ -55,7 +55,12 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
         {
             if (hitPoint.transform.TryGetComponent(out ITakeDamage damageable) && !hitPoint.transform.TryGetComponent(out PlayerController _))
             {
+                AudioManager.Instance.PlaySound("Bullet Hit");
                 damageable.TakeDamage(CurrentWeapon.Damage);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySound("Bullet Miss");
             }
 
             FireLine.SetPosition(0, FirePoint.position);
@@ -92,6 +97,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
         {
             weapons.Add(new WeaponObject(data, data.ClipSize));
             currentWeaponIndex = weapons.Count - 1;
+            AudioManager.Instance.PlaySound("PickupWeapon");
         }
 
         AddAmmo(data.ClipSize * NewWeaponClipAmount, data.AmmoType);

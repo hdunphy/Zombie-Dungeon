@@ -77,6 +77,7 @@ public class EnemyController : MonoBehaviour, ITakeDamage
         {
             if (hit.CompareTag("Player"))
             {
+                AudioManager.Instance.PlaySound("Zombie Bite");
                 Player.TakeDamage(Damage);
             }
         }

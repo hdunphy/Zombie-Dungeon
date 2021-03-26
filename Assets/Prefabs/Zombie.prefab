@@ -199,13 +199,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 3309902451392598790}
   Movement: {fileID: -8411718611757270941}
-  Health: 100
+  Health: 75
   AttackRange: 0.6
   AttackSpeed: 0.5
-  Damage: 25
+  Damage: 20
   AmmoDropChance: 0.33333
   AmmoDrop: {fileID: 65137689049169370, guid: a6a1912b22a84d44389b04f63e148175, type: 3}
-  WeaponDropChance: 0.508
+  WeaponDropChance: 0.4
   WeaponDrop: {fileID: 2088819935979949940, guid: 9a62c02494637ab4e9b32c54cb5a3199, type: 3}
 --- !u!114 &-8411718611757270941
 MonoBehaviour:

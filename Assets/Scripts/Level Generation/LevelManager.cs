@@ -33,7 +33,11 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         LevelRules.Instance.EndLevel += EndLevel;
+        StartLevel();
+    }
 
+    private void StartLevel()
+    {
         _enemyLimit = EnemyLimit;
         _enemyStartNumber = EnemyStartNumber;
         _spawnerRate = SpawnerRate;
@@ -82,17 +86,17 @@ public class LevelManager : MonoBehaviour
         _spawnerRate -= _spawnerRate * SpawnerRateLevelIncrease;
         _spawnerStartNumber += _spawnerStartNumber * SpawnerStartNumberLevelIncrease;
 
-        EnemyStartNumber = Mathf.RoundToInt(_enemyStartNumber);
-        EnemyLimit = Mathf.RoundToInt(_enemyLimit);
-        SpawnerRate = _spawnerRate;
-        SpawnerStartNumber = Mathf.RoundToInt(_spawnerStartNumber);
-
-
-        LevelRules.Instance.SetSpawnerData(SpawnerRate, SpawnerRadius, EnemyLimit, SpawnerStartNumber);
+        LevelRules.Instance.SetSpawnerData(_spawnerRate, SpawnerRadius, Mathf.RoundToInt(_enemyLimit), Mathf.RoundToInt(_spawnerStartNumber));
 
         Vector2 playerPos = FindObjectOfType<PlayerController>().transform.position;
-        LevelGenerator.NextLevel(EnemyStartNumber, SpawnerStartNumber, playerPos);
+        LevelGenerator.NextLevel(Mathf.RoundToInt(_enemyStartNumber), Mathf.RoundToInt(_spawnerStartNumber), playerPos);
 
         yield return StartSpawners();
+    }
+
+    private void RestartLevel()
+    {
+
+        StartLevel();
     }
 }

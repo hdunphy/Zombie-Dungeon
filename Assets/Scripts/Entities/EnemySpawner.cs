@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private GameObject Enemy;
     [SerializeField] private float Health;
+    [SerializeField] private EntityDropTable EntityDropTable;
+
 
     //internal variables
     private float nextSpawn;
@@ -24,11 +26,6 @@ public class EnemySpawner : MonoBehaviour, ITakeDamage
             SpawnEnemies();
             nextSpawn += LevelRules.Instance.SpawnRate;
         }
-    }
-
-    private void OnDestroy()
-    {
-        LevelRules.Instance.RemoveSpawner();
     }
 
     private void SpawnEnemies()
@@ -72,6 +69,10 @@ public class EnemySpawner : MonoBehaviour, ITakeDamage
 
         if (Health <= 0)
         {
+            EntityDropTable.GetDrop();
+
+            AudioManager.Instance.PlaySound("Spawner Death");
+            LevelRules.Instance.RemoveSpawner();
             Destroy(gameObject);
         }
     }
