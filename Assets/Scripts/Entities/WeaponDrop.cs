@@ -23,7 +23,7 @@ public class WeaponDrop : MonoBehaviour
         }
         if (weapon == null) weapon = availableWeapons[availableWeapons.Count - 1].Weapon;
 
-        WeaponRenderer.sprite = weapon.Sprite;
+        WeaponRenderer.sprite = weapon.Icon;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
