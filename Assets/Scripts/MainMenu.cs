@@ -9,20 +9,29 @@ public class MainMenu : MonoBehaviour
     public RectTransform MenuPanel;
     public float animationSpeed;
     public SettingsMenu SettingsMenu;
+    public HowToPlayMenu HowToPlayMenu;
 
-    private float outPosition;
+    private float outPositionX;
+    private float outPositionY;
 
     private void Start()
     {
-        outPosition = -MenuPanel.rect.width;
-        MenuPanel.anchoredPosition = new Vector2(outPosition, 0);
+        outPositionX = -MenuPanel.rect.width;
+        outPositionY = MenuPanel.rect.height;
+        MenuPanel.anchoredPosition = new Vector2(outPositionX, 0);
         SettingsMenu.SetAnimationSpeed(animationSpeed);
-        AnimateIn();
+        HowToPlayMenu.SetAnimationSpeed(animationSpeed);
+        AnimateInLeft();
     }
 
-    public void AnimateIn()
+    public void AnimateInLeft()
     {
         LeanTween.moveX(MenuPanel, 0, animationSpeed).setEase(LeanTweenType.easeOutQuad);
+    }
+
+    public void AnimateInUp()
+    {
+        LeanTween.moveY(MenuPanel, 0, animationSpeed).setEase(LeanTweenType.easeOutQuad);
     }
 
     public void OnPressedPlay()
@@ -34,8 +43,14 @@ public class MainMenu : MonoBehaviour
 
     public void OnPressedOptions()
     {
-        LeanTween.moveX(MenuPanel, outPosition, animationSpeed).setEase(LeanTweenType.easeOutQuad);
+        LeanTween.moveX(MenuPanel, outPositionX, animationSpeed).setEase(LeanTweenType.easeOutQuad);
         SettingsMenu.AnimateIn();
+    }
+
+    public void OnPressedHow()
+    {
+        LeanTween.moveY(MenuPanel, outPositionY, animationSpeed).setEase(LeanTweenType.easeOutQuad);
+        HowToPlayMenu.AnimateIn();
     }
 
     public void OnPressedQuit()

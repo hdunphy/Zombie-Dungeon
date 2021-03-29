@@ -74,7 +74,7 @@ public class SettingsMenu : MonoBehaviour
     public void OnBackPressed()
     {
         LeanTween.moveX(SettingsPanel, offscreenPosition, animationSpeed).setEase(LeanTweenType.easeOutQuad);
-        FindObjectOfType<MainMenu>().AnimateIn();
+        FindObjectOfType<MainMenu>().AnimateInLeft();
     }
 
     private void OnDestroy()

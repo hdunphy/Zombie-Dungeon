@@ -54,6 +54,7 @@ public class LevelGenerator : MonoBehaviour
     //        PostFloorCreationJobs();
     //    }
     //}
+    public GridSpace[,] GetLevelGrid() { return LevelGrid; }
 
     public void StartLevelCreation()
     {
