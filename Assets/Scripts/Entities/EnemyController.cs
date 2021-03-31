@@ -45,8 +45,8 @@ public class EnemyController : MonoBehaviour, ITakeDamage
             {
                 PathFinding.UpdatePath(Player.transform.position);
                 var Dir = PathFinding.GetDirection();
-                Vector2Int dirInt = Vector2Int.RoundToInt(Dir);
-                if (dirInt != Vector2.zero)
+                //Vector2Int dirInt = Vector2Int.RoundToInt(Dir);
+                if (Dir != Vector2.zero)
                 {
                     isMoving = true;
                 }

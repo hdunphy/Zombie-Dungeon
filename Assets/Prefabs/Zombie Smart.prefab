@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3309902451392598790}
   - component: {fileID: 347467584780441925}
   - component: {fileID: -8411718611757270941}
-  - component: {fileID: 100056142482074961}
+  - component: {fileID: 9082518460948442501}
   m_Layer: 0
   m_Name: Zombie Smart
   m_TagString: Untagged
@@ -222,7 +222,7 @@ MonoBehaviour:
   Rb: {fileID: 2728721504783577094}
   SpriteTransform: {fileID: 2710872548253730104}
   MoveSpeed: 150
---- !u!114 &100056142482074961
+--- !u!114 &9082518460948442501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,9 +231,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6183675079140182921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60274798eb51d9141b5d61c5ad4bc1c5, type: 3}
+  m_Script: {fileID: 11500000, guid: ba0c5dce6a34ebe498267b3bd56b1f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallLayer:
+  WallMask:
     serializedVersion: 2
     m_Bits: 512
+  FollowRadius: 2
+  _debug: 1

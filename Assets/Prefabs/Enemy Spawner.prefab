@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49e48bf00a3b9f49b4042b40cdeda4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 6183675079140182921, guid: ba26815a3ca6308488e81473d206ee2a, type: 3}
+  Enemy: {fileID: 6183675079140182921, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
   Health: 50
   EntityDropTable: {fileID: 4350098177159365505}
 --- !u!114 &4350098177159365505
