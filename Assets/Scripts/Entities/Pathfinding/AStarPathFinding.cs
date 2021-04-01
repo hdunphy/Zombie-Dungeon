@@ -9,6 +9,7 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
     [SerializeField] private float FollowRadius;
     [SerializeField] private float StepSize;
     [SerializeField] private float DistanceCheck;
+    [SerializeField] private float NextMoveCheck;
 
     public bool _debug;
 
@@ -46,7 +47,7 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
         }
         else
         {
-            if ((nextMove - pos).sqrMagnitude < 0.01)
+            if ((nextMove - pos).sqrMagnitude < (NextMoveCheck * NextMoveCheck))
             {
                 nextMove = Path.Pop();
             }
@@ -59,11 +60,12 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
     public void UpdatePath(Vector2 _target)
     {
         Vector2Int roundedTarget = Vector2Int.RoundToInt(_target);
-        float Distance = Vector2.Distance(_target, transform.position);
-        if (roundedTarget != target && Distance < DistanceCheck)
+        if (roundedTarget != target)
         {
             target = roundedTarget;
-            CalculatePath();
+            float Distance = Vector2.Distance(_target, transform.position);
+            if (Distance < DistanceCheck)
+                CalculatePath();
         }
     }
 

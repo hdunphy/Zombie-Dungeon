@@ -165,7 +165,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 15329955}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3150db9d96f81674cb472b3789456a84, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -3324,6 +3324,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 5737754977094310371, guid: d98ec3e1eeb308c449a55a8febfec5ca, type: 3}
   EnemyPrefab: {fileID: 6183675079140182921, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
   SpanwerPrefab: {fileID: 2458464313150876365, guid: 9f56fd74e6a847047856e64eb5713cc8, type: 3}
+  TilemapOffset: {x: 0.5, y: 0.5}
 --- !u!114 &1559277937
 MonoBehaviour:
   m_ObjectHideFlags: 0

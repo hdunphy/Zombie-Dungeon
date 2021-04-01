@@ -13,32 +13,28 @@ public class AddSpaceToTileMap : MonoBehaviour, IAddSpaceToWorld
     [SerializeField] private GameObject PlayerPrefab;
     [SerializeField] private GameObject EnemyPrefab;
     [SerializeField] private GameObject SpanwerPrefab;
+    [SerializeField] private Vector2 TilemapOffset;
 
     private int GridToWorldConversion;
 
     public void AddSpaceToWorld(GridSpace gridSpace, Vector2 worldPosition)
     {
-        //Vector3Int tilePosition;
         switch (gridSpace)
         {
             case GridSpace.WALL:
-                //tilePosition = Wallmap.WorldToCell(worldPosition);
-                //Floormap.SetTile(tilePosition, WallTile);
                 AddTile(Wallmap, WallTile, worldPosition);
                 break;
             case GridSpace.FLOOR:
-                //tilePosition = Floormap.WorldToCell(worldPosition);
-                //Floormap.SetTile(tilePosition, FloorTile);
                 AddTile(Floormap, FloorTile, worldPosition);
                 break;
             case GridSpace.PLAYER:
-                Instantiate(PlayerPrefab, worldPosition, Quaternion.identity);
+                Instantiate(PlayerPrefab, worldPosition + TilemapOffset, Quaternion.identity);
                 break;
             case GridSpace.ENEMY:
-                Instantiate(EnemyPrefab, worldPosition, Quaternion.identity);
+                Instantiate(EnemyPrefab, worldPosition + TilemapOffset, Quaternion.identity);
                 break;
             case GridSpace.SPAWNER:
-                Instantiate(SpanwerPrefab, worldPosition, Quaternion.identity);
+                Instantiate(SpanwerPrefab, worldPosition + TilemapOffset, Quaternion.identity);
                 break;
             default:
                 Debug.LogWarning($"Not supposed to pass an {gridSpace} GridSpace");
