@@ -239,7 +239,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0, y: 0, z: 0}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -357,7 +357,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0, y: 0, z: 0}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -3322,7 +3322,7 @@ MonoBehaviour:
   FloorTile: {fileID: 11400000, guid: eeecb605e1eeca0429695804d0712f54, type: 2}
   WallTile: {fileID: 11400000, guid: 15370a3a5dc646c42a66d1d272432723, type: 2}
   PlayerPrefab: {fileID: 5737754977094310371, guid: d98ec3e1eeb308c449a55a8febfec5ca, type: 3}
-  EnemyPrefab: {fileID: 6183675079140182921, guid: ba26815a3ca6308488e81473d206ee2a, type: 3}
+  EnemyPrefab: {fileID: 6183675079140182921, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
   SpanwerPrefab: {fileID: 2458464313150876365, guid: 9f56fd74e6a847047856e64eb5713cc8, type: 3}
 --- !u!114 &1559277937
 MonoBehaviour:

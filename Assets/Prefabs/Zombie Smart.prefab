@@ -237,5 +237,7 @@ MonoBehaviour:
   WallMask:
     serializedVersion: 2
     m_Bits: 512
-  FollowRadius: 2
+  FollowRadius: 1.5
+  StepSize: 1
+  DistanceCheck: 100
   _debug: 1

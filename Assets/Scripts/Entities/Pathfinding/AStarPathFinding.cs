@@ -7,15 +7,19 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
 {
     [SerializeField] private LayerMask WallMask;
     [SerializeField] private float FollowRadius;
+    [SerializeField] private float StepSize;
+    [SerializeField] private float DistanceCheck;
+
     public bool _debug;
 
     private Stack<Vector2> Path;
     private Vector2 nextMove;
     private Vector2Int target;
 
-    private void Start()
+    private void Awake()
     {
         Path = new Stack<Vector2>();
+        nextMove = transform.position;
     }
 
     private void OnDrawGizmos()
@@ -26,7 +30,7 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
         {
             foreach (Vector2 _tile in Path)
             {
-                Gizmos.DrawSphere(_tile, .2f);
+                Gizmos.DrawSphere(_tile, .1f);
             }
         }
     }
@@ -36,7 +40,7 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
         Vector2 direction;
         Vector2 pos = transform.position;
 
-        if ((pos - target).sqrMagnitude < (FollowRadius))
+        if ((pos - target).sqrMagnitude < (FollowRadius * FollowRadius) || Path.Count == 0)
         {
             direction = (target - pos).normalized;
         }
@@ -55,7 +59,8 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
     public void UpdatePath(Vector2 _target)
     {
         Vector2Int roundedTarget = Vector2Int.RoundToInt(_target);
-        if (roundedTarget != target)
+        float Distance = Vector2.Distance(_target, transform.position);
+        if (roundedTarget != target && Distance < DistanceCheck)
         {
             target = roundedTarget;
             CalculatePath();
@@ -65,30 +70,30 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
     private void CalculatePath()
     {
         Path.Clear();
-        Vector2Int currentPos = Vector2Int.RoundToInt(transform.position);
+        Vector2 currentPos = Vector2Int.RoundToInt(transform.position);
 
-        Dictionary<Vector2Int, Vector2Int> cameFrom = new Dictionary<Vector2Int, Vector2Int>();
-        Dictionary<Vector2Int, int> costSoFar = new Dictionary<Vector2Int, int>
+        Dictionary<Vector2, Vector2> cameFrom = new Dictionary<Vector2, Vector2>();
+        Dictionary<Vector2, float> costSoFar = new Dictionary<Vector2, float>
         {
             { currentPos, 0 }
         };
 
-        PriorityQueue<Vector2Int> checkTileQueue = new PriorityQueue<Vector2Int>();
-        checkTileQueue.Add(new PriorityElement<Vector2Int>(currentPos, GetHueristic(currentPos)));
+        PriorityQueue<Vector2> checkTileQueue = new PriorityQueue<Vector2>();
+        checkTileQueue.Add(new PriorityElement<Vector2>(currentPos, GetHueristic(currentPos)));
 
 
         while (!checkTileQueue.IsEmpty())
         {
-            PriorityElement<Vector2Int> _CurrentElement = checkTileQueue.Dequeue();
+            PriorityElement<Vector2> _CurrentElement = checkTileQueue.Dequeue();
             if (_CurrentElement.Item.Equals(target))
             {
                 break;
             }
 
-            List<Vector2Int> possibleMoves = GetAdjacents(_CurrentElement.Item);
-            foreach (Vector2Int _move in possibleMoves)
+            List<Vector2> possibleMoves = GetAdjacents(_CurrentElement.Item);
+            foreach (Vector2 _move in possibleMoves)
             {
-                int cost = costSoFar[_CurrentElement.Item] + 1;
+                float cost = costSoFar[_CurrentElement.Item] + StepSize;
                 if (!costSoFar.ContainsKey(_move))
                 {
                     costSoFar.Add(_move, cost);
@@ -108,9 +113,9 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
         }
     }
 
-    private void GeneratePath(Dictionary<Vector2Int, Vector2Int> cameFrom, Vector2Int currentPos)
+    private void GeneratePath(Dictionary<Vector2, Vector2> cameFrom, Vector2 currentPos)
     {
-        Vector2Int _nextMove = target;
+        Vector2 _nextMove = target;
         while (!_nextMove.Equals(currentPos))
         {
 
@@ -121,11 +126,11 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
         nextMove = transform.position;
     }
 
-    private void AddPossibleMove(int cost, Vector2Int _move, PriorityQueue<Vector2Int> checkTileQueue,
-        Dictionary<Vector2Int, Vector2Int> cameFrom, Vector2Int _currentTile)
+    private void AddPossibleMove(float cost, Vector2 _move, PriorityQueue<Vector2> checkTileQueue,
+        Dictionary<Vector2, Vector2> cameFrom, Vector2 _currentTile)
     {
-        int prority = cost + GetHueristic(_move);
-        checkTileQueue.Add(new PriorityElement<Vector2Int>(_move, prority));
+        float prority = cost + GetHueristic(_move);
+        checkTileQueue.Add(new PriorityElement<Vector2>(_move, prority));
         if (cameFrom.ContainsKey(_move))
         {
             cameFrom[_move] = _currentTile;
@@ -136,18 +141,18 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
         }
     }
 
-    private List<Vector2Int> GetAdjacents(Vector2Int currentTile)
+    private List<Vector2> GetAdjacents(Vector2 currentTile)
     {
-        List<Vector2Int> adjacents = new List<Vector2Int>();
-        for (int i = -1; i <= 1; i++)
+        List<Vector2> adjacents = new List<Vector2>();
+        for (float i = -StepSize; i <= StepSize; i += StepSize)
         {
-            for (int j = -1; j <= 1; j++)
+            for (float j = -StepSize; j <= StepSize; j += StepSize)
             {
-                Vector2Int _tile = currentTile + new Vector2Int(i, j);
+                Vector2 _tile = currentTile + new Vector2(i, j);
 
                 if (!(i == 0 && j == 0))
                 {
-                    if (!Physics2D.OverlapCircle(_tile, .2f, WallMask))
+                    if (!Physics2D.OverlapCircle(_tile, .495f, WallMask))
                     {
                         adjacents.Add(_tile);
                     }
@@ -158,17 +163,17 @@ public class AStarPathFinding : MonoBehaviour, IPathFinding
         return adjacents;
     }
 
-    private int GetHueristic(Vector2Int currentPos)
+    private float GetHueristic(Vector2 currentPos)
     {
-        return Mathf.RoundToInt(Vector2Int.Distance(currentPos, target));
+        return Vector2.Distance(currentPos, target);
     }
 }
 
 public class PriorityElement<T>
 {
     public T Item { get; private set; }
-    public int Priority { get; private set; }
-    public PriorityElement(T _item, int _priority)
+    public float Priority { get; private set; }
+    public PriorityElement(T _item, float _priority)
     {
         Item = _item;
         Priority = _priority;

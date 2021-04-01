@@ -3479,6 +3479,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -7, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 0, y: -2, z: 0}
     second:
       serializedVersion: 2
@@ -3509,6 +3519,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -6, y: -1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 0, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -3530,6 +3550,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -10, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -7, y: 0, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -3901,13 +3931,13 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 76
+  - m_RefCount: 79
     m_Data: {fileID: 11400000, guid: 15370a3a5dc646c42a66d1d272432723, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 76
+  - m_RefCount: 79
     m_Data: {fileID: 6433166901830859500, guid: 2caf3897a925bd940a572b9496b03de1, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 76
+  - m_RefCount: 79
     m_Data:
       e00: 1
       e01: 0
@@ -3926,7 +3956,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 76
+  - m_RefCount: 79
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -3961,11 +3991,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2710872548253730104, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.997239
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2710872548253730104, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.23568827
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2710872548253730104, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4006,6 +4036,10 @@ PrefabInstance:
     - target: {fileID: 6183675079140182921, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
       propertyPath: m_Name
       value: Zombie Smart
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082518460948442501, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
+      propertyPath: StepSize
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
