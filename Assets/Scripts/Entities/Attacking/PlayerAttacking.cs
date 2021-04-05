@@ -21,6 +21,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     private Dictionary<AmmoType, AmmoAmount> heldAmmo;
 
     private Action attackEvent;
+    private Coroutine ReloadCoroutine;
 
     // Start is called before the first frame update
     void Awake()
@@ -92,8 +93,11 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
     public void SetWeaponData(WeaponData data)
     {
+        if (ReloadCoroutine != null)
+            StopCoroutine(ReloadCoroutine);
+
         int index = weapons.FindIndex(x => x.Data == data);
-        if(index < 0)
+        if (index < 0)
         {
             weapons.Add(new WeaponObject(data, data.ClipSize));
             currentWeaponIndex = weapons.Count - 1;
@@ -103,6 +107,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
         AddAmmo(data.ClipSize * NewWeaponClipAmount, data.AmmoType);
 
         UpdateWeapon();
+        nextFire = Time.time;// + switching time ?
     }
 
     private void UpdateWeapon()
@@ -129,6 +134,37 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
     public void Reload()
     {
+        if (CurrentWeapon.ClipSize == CurrentAmmo)
+        {
+            AudioManager.Instance.PlaySound("Reload");
+        }
+        else
+        {
+            if (ReloadCoroutine != null)
+                StopCoroutine(ReloadCoroutine);
+            ReloadCoroutine = StartCoroutine(ReloadWeapon(CurrentWeapon.ReloadTime));
+        }
+    }
+
+    private IEnumerator ReloadWeapon(float seconds)
+    {
+        PlayerHUD.Instance.Reload(seconds);
+        nextFire = Time.time + seconds;
+
+        if (seconds > 0)
+        {
+            AudioManager.Instance.PlaySound("Clip out");
+
+            yield return new WaitForSeconds(seconds / 2f);
+
+            if (seconds > 1)
+            {
+                AudioManager.Instance.PlaySound("Clip In");
+            }
+
+            yield return new WaitForSeconds(seconds / 2f);
+        }
+
         weapons[currentWeaponIndex].AmmoInClip = heldAmmo[CurrentWeapon.AmmoType].Reload(CurrentWeapon.ClipSize, CurrentAmmo);
         AudioManager.Instance.PlaySound("Reload");
         UpdateAmmoHUD();

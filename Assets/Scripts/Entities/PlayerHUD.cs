@@ -11,6 +11,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TMP_Text AmmoAmmountText;
     [SerializeField] private Image AmmoRenderer;
     [SerializeField] private List<Sprite> AmmoSprites;
+    [SerializeField] private RectTransform ReloadBar;
 
     [Header("Guns")]
     [SerializeField] private Image SelectedGun;
@@ -27,7 +28,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -72,5 +73,13 @@ public class PlayerHUD : MonoBehaviour
     public void SetWaveNumber(int waveNumber)
     {
         WaveText.text = $"Wave {waveNumber}";
+    }
+
+    public void Reload(float seconds)
+    {
+        ReloadBar.localScale = new Vector3(0, 1, 1);
+        ReloadBar.gameObject.SetActive(true);
+        LeanTween.scale(ReloadBar, Vector3.one, seconds).
+            setOnComplete(() => { ReloadBar.gameObject.SetActive(false); });
     }
 }

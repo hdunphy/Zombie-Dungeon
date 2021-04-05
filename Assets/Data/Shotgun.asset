@@ -20,6 +20,7 @@ MonoBehaviour:
   FireRate: 0.5
   WeaponDistance: 3
   ShotDuration: 0.2
+  ReloadTime: 2
   ClipSize: 2
   AmmoType: 2
   FirePoint: {x: 0.084, y: 0.248, z: 0}

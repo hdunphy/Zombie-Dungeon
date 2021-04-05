@@ -164,3 +164,19 @@ MonoBehaviour:
     PlayOnStart: 0
     AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
     AudioSource: {fileID: 0}
+  - name: Clip In
+    Clip: {fileID: 8300000, guid: eb5685b26a6494994af389a3293064e8, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}
+  - name: Clip Out
+    Clip: {fileID: 8300000, guid: e0c70bed5c1a4443083a81de5648c7d5, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+    PlayOnStart: 0
+    AudioMixerGroup: {fileID: 178268199030973551, guid: 0e51569ec5c17aa4cb27ef04661b170d, type: 2}
+    AudioSource: {fileID: 0}

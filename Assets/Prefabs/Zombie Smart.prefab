@@ -240,5 +240,5 @@ MonoBehaviour:
   FollowRadius: 1.5
   StepSize: 1
   DistanceCheck: 20
-  NextMoveCheck: 0.5
+  NextMoveCheck: 0.6
   _debug: 1

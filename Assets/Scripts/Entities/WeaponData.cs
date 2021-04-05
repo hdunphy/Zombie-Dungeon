@@ -14,6 +14,7 @@ public class WeaponData : ScriptableObject
     public float FireRate;
     public float WeaponDistance;
     public float ShotDuration;
+    public float ReloadTime;
     public int ClipSize;
     public AmmoType AmmoType;
     public Vector3 FirePoint;
