@@ -153,7 +153,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
         if (seconds > 0)
         {
-            AudioManager.Instance.PlaySound("Clip out");
+            AudioManager.Instance.PlaySound("Clip Out");
 
             yield return new WaitForSeconds(seconds / 2f);
 
