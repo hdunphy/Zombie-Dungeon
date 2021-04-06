@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour, ITakeDamage
         PlayerHUD.Instance.SetHealthPercent(CurrentHealth / Health);
     }
 
-    public void AddAmmo(int ammo, AmmoType ammoType)
+    public void AddAmmo(int ammo, AmmoData ammoType)
     {
         Attacking.AddAmmo(ammo, ammoType);
     }

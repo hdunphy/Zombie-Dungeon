@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-public enum AmmoType { Small, Medium, Shotgun }
-
-[CreateAssetMenu(fileName = "WeaponData", menuName = "Weapons/WeaponData")]
-public class WeaponData : ScriptableObject
+[CreateAssetMenu(fileName = "WeaponData", menuName = "Drops/WeaponData")]
+public class WeaponData : IDropScriptableObject
 {
     public Sprite Sprite;
     public Sprite Icon;
@@ -16,6 +14,6 @@ public class WeaponData : ScriptableObject
     public float ShotDuration;
     public float ReloadTime;
     public int ClipSize;
-    public AmmoType AmmoType;
+    public AmmoData AmmoType;
     public Vector3 FirePoint;
 }

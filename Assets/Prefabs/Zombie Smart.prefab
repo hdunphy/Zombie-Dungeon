@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 347467584780441925}
   - component: {fileID: -8411718611757270941}
   - component: {fileID: 9082518460948442501}
+  - component: {fileID: -3057941194919318655}
   m_Layer: 0
   m_Name: Zombie Smart
   m_TagString: Untagged
@@ -203,10 +204,7 @@ MonoBehaviour:
   AttackRange: 0.6
   AttackSpeed: 0.5
   Damage: 20
-  AmmoDropChance: 0.33333
-  AmmoDrop: {fileID: 65137689049169370, guid: a6a1912b22a84d44389b04f63e148175, type: 3}
-  WeaponDropChance: 0.4
-  WeaponDrop: {fileID: 2088819935979949940, guid: 9a62c02494637ab4e9b32c54cb5a3199, type: 3}
+  EntityDropTable: {fileID: -3057941194919318655}
 --- !u!114 &-8411718611757270941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,3 +240,25 @@ MonoBehaviour:
   DistanceCheck: 20
   NextMoveCheck: 0.6
   _debug: 1
+--- !u!114 &-3057941194919318655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6183675079140182921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea1d0b3109f25e4eaba635b080a95d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - RollChance: 0.33333
+    IsEmpty: 0
+    DropObject: {fileID: 65137689049169370, guid: a6a1912b22a84d44389b04f63e148175, type: 3}
+  - RollChance: 0.4
+    IsEmpty: 0
+    DropObject: {fileID: 2088819935979949940, guid: 9a62c02494637ab4e9b32c54cb5a3199, type: 3}
+  - RollChance: 0
+    IsEmpty: 1
+    DropObject: {fileID: 0}

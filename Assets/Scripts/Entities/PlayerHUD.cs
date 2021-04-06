@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class PlayerHUD : MonoBehaviour
 {
     [Header("Ammo")]
     [SerializeField] private TMP_Text AmmoAmmountText;
     [SerializeField] private Image AmmoRenderer;
-    [SerializeField] private List<Sprite> AmmoSprites;
     [SerializeField] private RectTransform ReloadBar;
 
     [Header("Guns")]
@@ -43,26 +39,21 @@ public class PlayerHUD : MonoBehaviour
         AmmoAmmountText.text = $"{currentClip} / {totalAmmo}";
     }
 
-    public void UpdateAmmoType(AmmoType ammoType)
+    public void UpdateAmmoType(AmmoData ammoType)
     {
-        AmmoRenderer.sprite = GetSpriteFromAmmoType(ammoType);
-    }
-
-    public Sprite GetSpriteFromAmmoType(AmmoType ammoType)
-    {
-        return AmmoSprites[(int)ammoType];
+        AmmoRenderer.sprite = ammoType.Icon;
     }
 
     public void SetHealthPercent(float percent)
     {
         percent = Mathf.Clamp(percent, 0, 1);
         LeanTween.scale(HealthBarTransform, new Vector3(percent, 1), .5f);
-        //HealthBarTransform.localScale = new Vector3(percent, 1);
     }
 
     public void SetSelectedGun(Sprite sprite)
     {
         SelectedGun.sprite = sprite;
+        ReloadBar.gameObject.SetActive(false);
     }
 
     public void SetScore(int score)

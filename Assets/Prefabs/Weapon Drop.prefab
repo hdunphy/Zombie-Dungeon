@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2088819935979949930}
-  - component: {fileID: 2088819935979949931}
   - component: {fileID: 6679145260985309799}
+  - component: {fileID: 2088819935979949931}
+  - component: {fileID: -5856267878109872966}
   m_Layer: 2
   m_Name: Weapon Drop
   m_TagString: Untagged
@@ -34,28 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2088819935979949931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088819935979949940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf71653a44164348b46b54450a734e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  availableWeapons:
-  - RollChance: 0.15
-    Weapon: {fileID: 11400000, guid: fb30a0ff5838f2f4a9912294645f6dc2, type: 2}
-  - RollChance: 0.35
-    Weapon: {fileID: 11400000, guid: 8b6c21ca83eb65d488e03c31e4e11d69, type: 2}
-  - RollChance: 0.65
-    Weapon: {fileID: 11400000, guid: 30c304f772910704380bff6d5f494d7d, type: 2}
-  - RollChance: 1
-    Weapon: {fileID: 11400000, guid: 7e697cfcd6b55a0459749d6669e03b2d, type: 2}
-  WeaponRenderer: {fileID: 2088819936232709721}
 --- !u!61 &6679145260985309799
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -82,6 +61,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2088819935979949931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088819935979949940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf71653a44164348b46b54450a734e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponRenderer: {fileID: 2088819936232709721}
+  DropTable: {fileID: -5856267878109872966}
+--- !u!114 &-5856267878109872966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088819935979949940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61b6580ce049f346b2ad8a26404051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - RollChance: 0.45
+    IsEmpty: 0
+    DropScriptable: {fileID: 11400000, guid: 7e697cfcd6b55a0459749d6669e03b2d, type: 2}
+  - RollChance: 0.2
+    IsEmpty: 0
+    DropScriptable: {fileID: 11400000, guid: 8b6c21ca83eb65d488e03c31e4e11d69, type: 2}
+  - RollChance: 0.15
+    IsEmpty: 0
+    DropScriptable: {fileID: 11400000, guid: fb30a0ff5838f2f4a9912294645f6dc2, type: 2}
+  - RollChance: 0.3
+    IsEmpty: 0
+    DropScriptable: {fileID: 11400000, guid: 30c304f772910704380bff6d5f494d7d, type: 2}
 --- !u!1 &2088819936232709722
 GameObject:
   m_ObjectHideFlags: 0

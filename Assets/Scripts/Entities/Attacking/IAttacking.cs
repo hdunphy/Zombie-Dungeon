@@ -6,7 +6,7 @@ using UnityEngine;
 public interface IAttacking
 {
     void Reload();
-    void AddAmmo(int ammo, AmmoType ammoType);
+    void AddAmmo(int ammo, AmmoData ammoType);
     void SetIsAttacking(bool _isAttacking);
     bool GetIsAttacking();
     void ShowWeapon(bool isMoving);

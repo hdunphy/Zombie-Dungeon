@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EntityDropTable : MonoBehaviour
 {
-    [SerializeField] private List<DropChance> drops;
+    [SerializeField] private List<EntityDropChance> drops;
 
     public void GetDrop()
     {
@@ -14,7 +14,7 @@ public class EntityDropTable : MonoBehaviour
         float currentChance = 0;
         float roll = UnityEngine.Random.value;
 
-        foreach(DropChance _drop in drops)
+        foreach(EntityDropChance _drop in drops)
         {
             currentChance += _drop.RollChance;
             if(roll <= currentChance)
@@ -29,10 +29,12 @@ public class EntityDropTable : MonoBehaviour
 }
 
 [Serializable]
-public struct DropChance
+public struct EntityDropChance
 {
     [Range(0, 1)]
     public float RollChance;
     public bool IsEmpty;
+
+
     public GameObject DropObject;
 }

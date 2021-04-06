@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5922047301090331670}
   - component: {fileID: 777811806339362145}
   - component: {fileID: 4517756159888692130}
+  - component: {fileID: -1503006795984341262}
   m_Layer: 2
   m_Name: Ammo Drop
   m_TagString: Untagged
@@ -125,11 +126,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb42b6989f0293648934821ea06ec2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinDrop: 10
-  MaxDrop: 50
+  DropTable: {fileID: -1503006795984341262}
   Bullet_L: {fileID: 2586806477627836222}
   Bullet_M: {fileID: 1251216365785626600}
   Bullet_R: {fileID: 1877960707728856792}
+--- !u!114 &-1503006795984341262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65137689049169370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61b6580ce049f346b2ad8a26404051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - RollChance: 0.5
+    IsEmpty: 0
+    DropScriptable: {fileID: 11400000, guid: ec02084e831b4b044af1e0868219be9e, type: 2}
+  - RollChance: 0.3
+    IsEmpty: 0
+    DropScriptable: {fileID: 11400000, guid: e0a8dd7d106d3be40abad62806a3df7d, type: 2}
+  - RollChance: 0.2
+    IsEmpty: 0
+    DropScriptable: {fileID: 11400000, guid: 99b9b05b6150aa444a21e7ccf6d9692b, type: 2}
 --- !u!1 &1463727845010351173
 GameObject:
   m_ObjectHideFlags: 0

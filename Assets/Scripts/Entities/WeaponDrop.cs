@@ -2,45 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponDrop : MonoBehaviour
+public class WeaponDrop : IDropObject
 {
-    [SerializeField] private List<WeaponChance> availableWeapons;
     [SerializeField] private SpriteRenderer WeaponRenderer;
+    [SerializeField] private ScriptableDropTable DropTable;
 
     private WeaponData weapon;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        float roll = UnityEngine.Random.value;
-        foreach(WeaponChance _weaponChance in availableWeapons)
-        {
-            if(roll <= _weaponChance.RollChance)
-            {
-                weapon = _weaponChance.Weapon;
-                break;
-            }
-        }
-        if (weapon == null) weapon = availableWeapons[availableWeapons.Count - 1].Weapon;
-
-        WeaponRenderer.sprite = weapon.Icon;
+        AddScriptable(DropTable.GetDrop());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void AddScriptable(IDropScriptableObject dropScriptable)
     {
-        if (collision.CompareTag("Player"))
+        if (dropScriptable is null)
         {
-            collision.GetComponent<PlayerController>().SetWeaponData(weapon);
-
             Destroy(gameObject);
         }
+        else
+        {
+            weapon = (WeaponData)dropScriptable;
+            WeaponRenderer.sprite = weapon.Icon;
+        }
     }
-}
 
-[Serializable]
-public struct WeaponChance
-{
-    [Range(0, 1)]
-    public float RollChance;
-    public WeaponData Weapon;
+    protected override void AddDropObjectToPlayer(PlayerController playerController)
+    {
+        playerController.SetWeaponData(weapon);
+    }
 }

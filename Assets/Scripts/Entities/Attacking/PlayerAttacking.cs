@@ -18,7 +18,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     private int CurrentAmmo => weapons[currentWeaponIndex].AmmoInClip;
 
     private List<WeaponObject> weapons;
-    private Dictionary<AmmoType, AmmoAmount> heldAmmo;
+    private Dictionary<AmmoData, AmmoAmount> heldAmmo;
 
     private Action attackEvent;
     private Coroutine ReloadCoroutine;
@@ -26,7 +26,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
     // Start is called before the first frame update
     void Awake()
     {
-        heldAmmo = new Dictionary<AmmoType, AmmoAmount>();
+        heldAmmo = new Dictionary<AmmoData, AmmoAmount>();
         weapons = new List<WeaponObject>();
 
         isAttacking = false;
@@ -120,7 +120,7 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
         PlayerHUD.Instance.SetSelectedGun(CurrentWeapon.Icon);
     }
 
-    public void AddAmmo(int ammo, AmmoType ammoType)
+    public void AddAmmo(int ammo, AmmoData ammoType)
     {
         if (!heldAmmo.ContainsKey(ammoType))
         {

@@ -12,12 +12,13 @@ public class EnemyController : MonoBehaviour, ITakeDamage
     [SerializeField] private float AttackRange;
     [SerializeField] private float AttackSpeed;
     [SerializeField] private float Damage;
-    [Range(0, 1)]
-    [SerializeField] private float AmmoDropChance;
-    [SerializeField] private GameObject AmmoDrop;
-    [Range(0, 1)]
-    [SerializeField] private float WeaponDropChance;
-    [SerializeField] private GameObject WeaponDrop;
+    [SerializeField] private EntityDropTable EntityDropTable;
+    //[Range(0, 1)]
+    //[SerializeField] private float AmmoDropChance;
+    //[SerializeField] private GameObject AmmoDrop;
+    //[Range(0, 1)]
+    //[SerializeField] private float WeaponDropChance;
+    //[SerializeField] private GameObject WeaponDrop;
 
     private PlayerController Player;
     private IPathFinding PathFinding;
@@ -99,14 +100,7 @@ public class EnemyController : MonoBehaviour, ITakeDamage
         {
             AudioManager.Instance.PlaySound("Zombie Death");
 
-            if (UnityEngine.Random.value < AmmoDropChance)
-            {
-                Instantiate(AmmoDrop, transform.position, Quaternion.identity);
-            }
-            else if (UnityEngine.Random.value < WeaponDropChance)
-            {
-                Instantiate(WeaponDrop, transform.position, Quaternion.identity);
-            }
+            EntityDropTable.GetDrop();
 
             Destroy(gameObject);
         }

@@ -1,36 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoDrop : MonoBehaviour
+public class AmmoDrop : IDropObject
 {
-    [SerializeField] private int MinDrop;
-    [SerializeField] private int MaxDrop;
+    //[SerializeField] private List<AmmoChance> AmmoChances;
+    [SerializeField] private ScriptableDropTable DropTable;
     [SerializeField] private SpriteRenderer Bullet_L;
     [SerializeField] private SpriteRenderer Bullet_M;
     [SerializeField] private SpriteRenderer Bullet_R;
 
     private int ammo;
-    private AmmoType ammoType;
+    private AmmoData data;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        AmmoType[] ammoTypes = (AmmoType[])Enum.GetValues(typeof(AmmoType));
-        ammo = UnityEngine.Random.Range(MinDrop, MaxDrop);
-        ammoType = ammoTypes[UnityEngine.Random.Range(0, ammoTypes.Length)];
+        AddScriptable(DropTable.GetDrop());
+    }
 
-        Sprite _ammoSprite = PlayerHUD.Instance.GetSpriteFromAmmoType(ammoType);
+    public override void AddScriptable(IDropScriptableObject dropScriptable)
+    {
+        data = (AmmoData)dropScriptable;
+
+        ammo = UnityEngine.Random.Range(data.Min, data.Max);
+        Sprite _ammoSprite = data.Sprite;
         Bullet_L.sprite = _ammoSprite;
         Bullet_M.sprite = _ammoSprite;
         Bullet_R.sprite = _ammoSprite;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void AddDropObjectToPlayer(PlayerController playerController)
     {
-        if (collision.CompareTag("Player"))
-        {
-            collision.GetComponent<PlayerController>().AddAmmo(ammo, ammoType);
-            Destroy(gameObject);
-        }
+        playerController.AddAmmo(ammo, data);
     }
 }
