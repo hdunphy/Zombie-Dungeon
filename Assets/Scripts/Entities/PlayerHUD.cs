@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -22,11 +23,14 @@ public class PlayerHUD : MonoBehaviour
 
     public static PlayerHUD Instance;
 
+    private int reloadLeanTweenId;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            reloadLeanTweenId = -1;
         }
         else
         {
@@ -53,6 +57,13 @@ public class PlayerHUD : MonoBehaviour
     public void SetSelectedGun(Sprite sprite)
     {
         SelectedGun.sprite = sprite;
+        StopReload();
+    }
+
+    private void StopReload()
+    {
+        LeanTween.cancel(reloadLeanTweenId);
+        ReloadBar.localScale = new Vector3(0, 1, 1);
         ReloadBar.gameObject.SetActive(false);
     }
 
@@ -68,9 +79,9 @@ public class PlayerHUD : MonoBehaviour
 
     public void Reload(float seconds)
     {
-        ReloadBar.localScale = new Vector3(0, 1, 1);
+        StopReload();
         ReloadBar.gameObject.SetActive(true);
-        LeanTween.scale(ReloadBar, Vector3.one, seconds).
-            setOnComplete(() => { ReloadBar.gameObject.SetActive(false); });
+        reloadLeanTweenId = LeanTween.scale(ReloadBar, Vector3.one, seconds).
+            setOnComplete(() => { ReloadBar.gameObject.SetActive(false); }).id;
     }
 }

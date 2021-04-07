@@ -10,4 +10,6 @@ public class AmmoData : IDropScriptableObject
     public Sprite Icon;
     public int Min;
     public int Max;
+    
+    public IShotType ShotTypeObj;
 }

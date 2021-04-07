@@ -41,7 +41,9 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
         if (isAttacking && CurrentAmmo > 0 && Time.time > nextFire)
         {
-            StartCoroutine(Shoot());
+            StartCoroutine(weapons[currentWeaponIndex].Shoot());
+            weapons[currentWeaponIndex].Fire();
+            UpdateAmmoHUD();
             nextFire = Time.time + CurrentWeapon.FireRate;
         }
     }
@@ -93,25 +95,27 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
 
     public void SetWeaponData(WeaponData data)
     {
-        if (ReloadCoroutine != null)
-            StopCoroutine(ReloadCoroutine);
-
         int index = weapons.FindIndex(x => x.Data == data);
         if (index < 0)
         {
-            weapons.Add(new WeaponObject(data, data.ClipSize));
+            IShotType shottype = Instantiate(data.AmmoType.ShotTypeObj, FirePoint);
+            weapons.Add(new WeaponObject(data, data.ClipSize, shottype));
             currentWeaponIndex = weapons.Count - 1;
             AudioManager.Instance.PlaySound("PickupWeapon");
+
+            UpdateWeapon();
+            nextFire = Time.time;// + switching time ?
         }
 
         AddAmmo(data.ClipSize * NewWeaponClipAmount, data.AmmoType);
-
-        UpdateWeapon();
-        nextFire = Time.time;// + switching time ?
     }
 
     private void UpdateWeapon()
     {
+        //if (ReloadCoroutine != null)
+        //    StopCoroutine(ReloadCoroutine);
+        StopAllCoroutines();
+
         ShotAudio.clip = CurrentWeapon.ShotAudioClip;
 
         WeaponRenderer.sprite = CurrentWeapon.Sprite;
@@ -140,8 +144,9 @@ public class PlayerAttacking : MonoBehaviour, IAttacking
         }
         else
         {
-            if (ReloadCoroutine != null)
-                StopCoroutine(ReloadCoroutine);
+            //if (ReloadCoroutine != null)
+            //    StopCoroutine(ReloadCoroutine);
+            StopAllCoroutines();
             ReloadCoroutine = StartCoroutine(ReloadWeapon(CurrentWeapon.ReloadTime));
         }
     }
