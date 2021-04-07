@@ -1750,11 +1750,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmmoAmmountText: {fileID: 1948241978}
   AmmoRenderer: {fileID: 437425868}
-  AmmoSprites:
-  - {fileID: -7976837497307082302, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
-  - {fileID: 7431529995326980795, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
-  - {fileID: 830317617348258784, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
-  - {fileID: 1757937406519661826, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
   ReloadBar: {fileID: 979407502}
   SelectedGun: {fileID: 1792386117}
   HealthBarTransform: {fileID: 909329396}

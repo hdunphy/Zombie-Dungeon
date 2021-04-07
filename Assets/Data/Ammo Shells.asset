@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c920dad9dd70dc24b920f6b531144c64, type: 3}
-  m_Name: Small Ammo 1
+  m_Name: Ammo Shells
   m_EditorClassIdentifier: 
-  name: Small
-  Sprite: {fileID: -7976837497307082302, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
-  Icon: {fileID: -7976837497307082302, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
-  Min: 15
-  Max: 45
+  name: Shells
+  Sprite: {fileID: 830317617348258784, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
+  Icon: {fileID: 830317617348258784, guid: 5b9114100602d654dad7bcc1256bff91, type: 3}
+  Min: 4
+  Max: 12
+  ShotTypeObj: {fileID: 1044568835103489567, guid: 5011b79ccf00ee149a21d3a668065867, type: 3}

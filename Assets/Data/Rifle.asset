@@ -22,5 +22,5 @@ MonoBehaviour:
   ShotDuration: 0.15
   ReloadTime: 1
   ClipSize: 32
-  AmmoType: 1
+  AmmoType: {fileID: 11400000, guid: e0a8dd7d106d3be40abad62806a3df7d, type: 2}
   FirePoint: {x: 0, y: 0.377, z: 0}
