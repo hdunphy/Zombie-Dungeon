@@ -3504,13 +3504,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnerRadius: 1
   EnemyStartNumber: 3
-  EnemyStartNumberLevelIncrease: 0.5
-  SpawnerStartNumber: 1
+  EnemyStartNumberLevelIncrease: 0.2
+  SpawnerStartNumber: 0.49
   SpawnerStartNumberLevelIncrease: 0.1
-  SpawnerRate: 10
-  SpawnerRateLevelIncrease: 0.1
-  EnemyLimit: 10
-  EnemyLimitLevelIncrease: 0.25
+  SpawnerRate: 12
+  SpawnerRateLevelIncrease: 0.05
+  EnemyLimit: 8
+  EnemyLimitLevelIncrease: 0.15
   LevelGenerator: {fileID: 1559277934}
   OnDeathPopup: {fileID: 86672429}
 --- !u!1 &1559765867

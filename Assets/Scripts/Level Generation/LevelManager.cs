@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] private float EnemyStartNumberLevelIncrease;
 
-    [SerializeField] private int SpawnerStartNumber;
+    [SerializeField] private float SpawnerStartNumber;
     [Range(0, 1)]
     [SerializeField] private float SpawnerStartNumberLevelIncrease;
 
@@ -43,8 +43,8 @@ public class LevelManager : MonoBehaviour
         _spawnerRate = SpawnerRate;
         _spawnerStartNumber = SpawnerStartNumber;
 
-        LevelRules.Instance.SetSpawnerData(SpawnerRate, SpawnerRadius, EnemyLimit, SpawnerStartNumber);
-        LevelGenerator.StartLevelCreation(EnemyStartNumber, SpawnerStartNumber);
+        LevelRules.Instance.SetSpawnerData(SpawnerRate, SpawnerRadius, EnemyLimit, Mathf.RoundToInt(SpawnerStartNumber));
+        LevelGenerator.StartLevelCreation(EnemyStartNumber, Mathf.RoundToInt(SpawnerStartNumber));
 
         StartCoroutine(StartSpawners());
     }
