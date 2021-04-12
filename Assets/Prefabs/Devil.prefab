@@ -70,8 +70,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -364057083
   m_SortingLayer: 3
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 6019453725058403666, guid: cc992515b252b1540ab0aad39959f8d2, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7152461225723744212, guid: e4bdbe97ba1921447b286d857a26eac7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,10 +96,11 @@ GameObject:
   - component: {fileID: 3309902451392598790}
   - component: {fileID: 347467584780441925}
   - component: {fileID: -8411718611757270941}
-  - component: {fileID: -2495161756018651426}
-  - component: {fileID: 3951145086333008492}
+  - component: {fileID: 9082518460948442501}
+  - component: {fileID: -3057941194919318655}
+  - component: {fileID: -6554531419635492239}
   m_Layer: 0
-  m_Name: Zombie
+  m_Name: Devil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +178,7 @@ Animator:
   m_GameObject: {fileID: 6183675079140182921}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5488c9ee336f2844286bccc36324967c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1866a2e44cb2add44b8490e452df928a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -201,7 +202,7 @@ MonoBehaviour:
   Animator: {fileID: 3309902451392598790}
   Movement: {fileID: -8411718611757270941}
   Health: 75
-  EntityDropTable: {fileID: 0}
+  EntityDropTable: {fileID: -3057941194919318655}
 --- !u!114 &-8411718611757270941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ MonoBehaviour:
   Rb: {fileID: 2728721504783577094}
   SpriteTransform: {fileID: 2710872548253730104}
   MoveSpeed: 150
---- !u!114 &-2495161756018651426
+--- !u!114 &9082518460948442501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,10 +227,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6183675079140182921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b056dcb75286cf4f962e00095dd9488, type: 3}
+  m_Script: {fileID: 11500000, guid: ba0c5dce6a34ebe498267b3bd56b1f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3951145086333008492
+  WallMask:
+    serializedVersion: 2
+    m_Bits: 512
+  FollowRadius: 1.5
+  StepSize: 1
+  DistanceCheck: 20
+  NextMoveCheck: 0.6
+  _debug: 1
+--- !u!114 &-3057941194919318655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,9 +247,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 6183675079140182921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a03f242737c4ce640ac9e62476be1ce6, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ea1d0b3109f25e4eaba635b080a95d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 0.6
-  AttackDuration: 0.5
+  drops:
+  - RollChance: 0.33333
+    IsEmpty: 0
+    DropObject: {fileID: 65137689049169370, guid: a6a1912b22a84d44389b04f63e148175, type: 3}
+  - RollChance: 0.4
+    IsEmpty: 0
+    DropObject: {fileID: 2088819935979949940, guid: 9a62c02494637ab4e9b32c54cb5a3199, type: 3}
+  - RollChance: 0
+    IsEmpty: 1
+    DropObject: {fileID: 0}
+--- !u!114 &-6554531419635492239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6183675079140182921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0c1926eb628ad4eb534c4fbac87e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackRange: 10
+  AttackDuration: 0.2
+  AttackSpeed: 1
   Damage: 20
+  ProjectileSpeed: 5
+  Projectile: {fileID: 3951973692183803967, guid: 3d0cafd592e34cb4aba3ce1b799b7468, type: 3}
+  CollisionLayer:
+    serializedVersion: 2
+    m_Bits: 512

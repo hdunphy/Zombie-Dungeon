@@ -48,10 +48,19 @@ public class Movement : MonoBehaviour
         var dir = Vector2Int.RoundToInt(moveDirection);
         if (dir != Vector2.zero)
         {
-            if(!RotationValues.TryGetValue(dir, out float z))
+            if (!RotationValues.TryGetValue(dir, out float z))
                 Debug.LogWarning($"No value for {dir}");
             SpriteTransform.eulerAngles = new Vector3(0, 0, z);
         }
+    }
+
+    public void RotateTowards(Vector2 _target)
+    {
+        var offset = -90f;
+        Vector2 direction = _target - (Vector2)transform.position;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        SpriteTransform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
     }
 
     public void SetCanMove(bool _canMove)

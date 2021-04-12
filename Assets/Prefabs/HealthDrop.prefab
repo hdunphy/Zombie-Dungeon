@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5478577454440667865}
   - component: {fileID: 9132511252459702167}
   - component: {fileID: 7269446374207679521}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HealthDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6133185513310980700}
   - component: {fileID: 3749575548532276572}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Health Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

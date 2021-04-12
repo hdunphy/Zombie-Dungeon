@@ -9,24 +9,20 @@ public class EnemyController : MonoBehaviour, ITakeDamage
     [SerializeField] private Animator Animator;
     [SerializeField] private Movement Movement;
     [SerializeField] private float Health;
-    [SerializeField] private float AttackRange;
-    [SerializeField] private float AttackSpeed;
-    [SerializeField] private float Damage;
+    //[SerializeField] private float AttackRange;
+    //[SerializeField] private float AttackSpeed;
+    //[SerializeField] private float Damage;
     [SerializeField] private EntityDropTable EntityDropTable;
-    //[Range(0, 1)]
-    //[SerializeField] private float AmmoDropChance;
-    //[SerializeField] private GameObject AmmoDrop;
-    //[Range(0, 1)]
-    //[SerializeField] private float WeaponDropChance;
-    //[SerializeField] private GameObject WeaponDrop;
 
     private PlayerController Player;
     private IPathFinding PathFinding;
+    private IEnemyAttack EnemyAttack;
     private bool isAttacking = false;
 
     private void Start()
     {
         PathFinding = GetComponent<IPathFinding>();
+        EnemyAttack = GetComponent<IEnemyAttack>();
         Player = FindObjectOfType<PlayerController>();
 
         LevelRules.Instance.AddEnemy();
@@ -42,22 +38,23 @@ public class EnemyController : MonoBehaviour, ITakeDamage
         bool isMoving = false;
         if (Player != null && !isAttacking)
         {
-            if (Vector3.Distance(transform.position, Player.transform.position) > 2 * AttackRange)
+            //TURN THIS INTO A STATE MACHINE
+            if (EnemyAttack.CanAttack(Player.transform.position))
+            {
+                Movement.RotateTowards(Player.transform.position);
+                isAttacking = true;
+                Animator.SetTrigger("IsAttacking");
+            }
+            else
             {
                 PathFinding.UpdatePath(Player.transform.position);
                 var Dir = PathFinding.GetDirection();
-                //Vector2Int dirInt = Vector2Int.RoundToInt(Dir);
+
                 if (Dir != Vector2.zero)
                 {
                     isMoving = true;
                 }
                 Movement.SetMoveDirection(Dir);
-            }
-            else
-            {
-                isAttacking = true;
-                Animator.SetTrigger("IsAttacking");
-                //StartCoroutine(Attack());
             }
         }
         else
@@ -68,27 +65,13 @@ public class EnemyController : MonoBehaviour, ITakeDamage
     //Gets called by Animator
     private void Attack()
     {
-        //yield return new WaitForSeconds(AttackSpeed);
-
-        Vector2 attackPoint = transform.position + transform.up * AttackRange;
-        var colliders = Physics2D.OverlapCircleAll(attackPoint, .5f);
-        //Debug.Log($"Attack Point: {attackPoint}");
-
-        foreach (Collider2D hit in colliders)
-        {
-            if (hit.CompareTag("Player"))
-            {
-                AudioManager.Instance.PlaySound("Zombie Bite");
-                Player.TakeDamage(Damage);
-            }
-        }
-
+        EnemyAttack.StartAttack();
         StartCoroutine(WaitForNextAttack());
     }
 
     private IEnumerator WaitForNextAttack()
     {
-        yield return new WaitForSeconds(AttackSpeed);
+        yield return new WaitForSeconds(EnemyAttack.GetAttackDuration());
 
         isAttacking = false;
     }
@@ -107,11 +90,11 @@ public class EnemyController : MonoBehaviour, ITakeDamage
     }
 
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        var point = transform.position + transform.up * AttackRange;
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.white;
+    //    var point = transform.position + transform.up * EnemyAttack.GetAttackRange();
 
-        Gizmos.DrawSphere(point, .5f);
-    }
+    //    Gizmos.DrawSphere(point, .5f);
+    //}
 }
