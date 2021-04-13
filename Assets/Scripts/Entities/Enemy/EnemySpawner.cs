@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour, ITakeDamage
     private void Awake()
     {
         nextSpawn = float.MaxValue;
+        LevelRules.Instance.AddSpawner();
     }
 
     // Update is called once per frame

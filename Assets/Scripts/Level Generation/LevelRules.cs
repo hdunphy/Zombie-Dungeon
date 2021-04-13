@@ -43,12 +43,11 @@ public class LevelRules : MonoBehaviour
         PlayerHUD.Instance.SetWaveNumber(WaveNumber);
     }
 
-    public void SetSpawnerData(float _spawnRate, int _spawnRadius, int _enemyLimit, int _numberOfSpawners)
+    public void SetSpawnerData(float _spawnRate, int _spawnRadius, int _enemyLimit)
     {
         SpawnRate = _spawnRate;
         SpawnRadius = _spawnRadius;
         EnemyLimit = _enemyLimit;
-        NumberOfSpawners = _numberOfSpawners;
     }
 
     public void KilledEnemy(int enemies)
@@ -73,6 +72,11 @@ public class LevelRules : MonoBehaviour
     public void AddEnemy()
     {
         EnemyCount++;
+    }
+
+    public void AddSpawner()
+    {
+        NumberOfSpawners++;
     }
 
     public void RemoveSpawner()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -11,10 +12,6 @@ public class LevelManager : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] private float EnemyStartNumberLevelIncrease;
 
-    [SerializeField] private float SpawnerStartNumber;
-    [Range(0, 1)]
-    [SerializeField] private float SpawnerStartNumberLevelIncrease;
-
     [SerializeField] private float SpawnerRate;
     [Range(0, 1)]
     [SerializeField] private float SpawnerRateLevelIncrease;
@@ -23,11 +20,12 @@ public class LevelManager : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] private float EnemyLimitLevelIncrease;
 
-
     [SerializeField] private LevelGenerator LevelGenerator;
     [SerializeField] private OnDeathPopup OnDeathPopup;
 
-    private float _enemyStartNumber, _spawnerStartNumber, _spawnerRate, _enemyLimit;
+    [SerializeField] private List<LevelPrefab> LevelPrefabs;
+
+    private float _enemyStartNumber, _spawnerRate, _enemyLimit;
 
     // Start is called before the first frame update
     void Start()
@@ -41,10 +39,11 @@ public class LevelManager : MonoBehaviour
         _enemyLimit = EnemyLimit;
         _enemyStartNumber = EnemyStartNumber;
         _spawnerRate = SpawnerRate;
-        _spawnerStartNumber = SpawnerStartNumber;
 
-        LevelRules.Instance.SetSpawnerData(SpawnerRate, SpawnerRadius, EnemyLimit, Mathf.RoundToInt(SpawnerStartNumber));
-        LevelGenerator.StartLevelCreation(EnemyStartNumber, Mathf.RoundToInt(SpawnerStartNumber));
+        LevelPrefabs.ForEach(x => x.Start());
+
+        LevelRules.Instance.SetSpawnerData(SpawnerRate, SpawnerRadius, EnemyLimit);
+        LevelGenerator.StartLevelCreation(EnemyStartNumber, LevelPrefabs);
 
         StartCoroutine(StartSpawners());
     }
@@ -85,12 +84,13 @@ public class LevelManager : MonoBehaviour
         _enemyStartNumber += _enemyStartNumber * EnemyStartNumberLevelIncrease;
         _enemyLimit += _enemyLimit * EnemyLimitLevelIncrease;
         _spawnerRate -= _spawnerRate * SpawnerRateLevelIncrease;
-        _spawnerStartNumber += _spawnerStartNumber * SpawnerStartNumberLevelIncrease;
 
-        LevelRules.Instance.SetSpawnerData(_spawnerRate, SpawnerRadius, Mathf.RoundToInt(_enemyLimit), Mathf.RoundToInt(_spawnerStartNumber));
+        LevelPrefabs.ForEach(x => x.NextLevel());
+
+        LevelRules.Instance.SetSpawnerData(_spawnerRate, SpawnerRadius, Mathf.RoundToInt(_enemyLimit));
 
         Vector2 playerPos = FindObjectOfType<PlayerController>().transform.position;
-        LevelGenerator.NextLevel(Mathf.RoundToInt(_enemyStartNumber), Mathf.RoundToInt(_spawnerStartNumber), playerPos);
+        LevelGenerator.NextLevel(Mathf.RoundToInt(_enemyStartNumber), playerPos);
 
         yield return StartSpawners();
     }

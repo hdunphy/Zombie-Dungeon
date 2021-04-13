@@ -3436,10 +3436,6 @@ MonoBehaviour:
   DestroyWalkerChance: 0.1
   WalkerChangeDirectionChance: 0.33
   EnemyStartNumber: 5
-  LevelPrefabs:
-  - Instances: 2
-    RequiredSpace: 1
-    SpaceType: 5
   ShowLevelCreation: 0
 --- !u!4 &1559277935
 Transform:
@@ -3474,6 +3470,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 5737754977094310371, guid: d98ec3e1eeb308c449a55a8febfec5ca, type: 3}
   EnemyPrefab: {fileID: 6183675079140182921, guid: bd4c2f3cde724ff409288f5431e36e45, type: 3}
   SpanwerPrefab: {fileID: 2458464313150876365, guid: 9f56fd74e6a847047856e64eb5713cc8, type: 3}
+  DevilPrefab: {fileID: 6183675079140182921, guid: e9810df5e084dfd4f97a7974815cda18, type: 3}
   TilemapOffset: {x: 0.5, y: 0.5}
 --- !u!114 &1559277937
 MonoBehaviour:
@@ -3505,14 +3502,21 @@ MonoBehaviour:
   SpawnerRadius: 1
   EnemyStartNumber: 3
   EnemyStartNumberLevelIncrease: 0.2
-  SpawnerStartNumber: 0.49
-  SpawnerStartNumberLevelIncrease: 0.1
   SpawnerRate: 12
   SpawnerRateLevelIncrease: 0.05
   EnemyLimit: 8
   EnemyLimitLevelIncrease: 0.15
   LevelGenerator: {fileID: 1559277934}
   OnDeathPopup: {fileID: 86672429}
+  LevelPrefabs:
+  - StartNumber: 0.91
+    LevelIncrease: 0.1
+    RequiredSpace: 1
+    SpaceType: 5
+  - StartNumber: 0.5
+    LevelIncrease: 0.175
+    RequiredSpace: 1
+    SpaceType: 6
 --- !u!1 &1559765867
 GameObject:
   m_ObjectHideFlags: 0

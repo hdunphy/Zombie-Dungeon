@@ -23,8 +23,7 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Entities")]
     [SerializeField] private int EnemyStartNumber;
-    [SerializeField] private List<LevelPrefab> LevelPrefabs;
-
+    
     [Header("Debug")]
     [SerializeField] private bool ShowLevelCreation;
 
@@ -34,6 +33,7 @@ public class LevelGenerator : MonoBehaviour
         public Vector2 Position;
     }
 
+    private List<LevelPrefab> LevelPrefabs;
     private IAddSpaceToWorld AddSpaceImplementation;
     private List<Walker> Walkers;
     private GridSpace[,] LevelGrid;
@@ -41,19 +41,6 @@ public class LevelGenerator : MonoBehaviour
 
     private readonly List<Vector2Int> Directions = new List<Vector2Int>() { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
 
-    //private void Start()
-    //{
-    //    SetUp();
-    //    if (ShowLevelCreation)
-    //    {
-    //        StartCoroutine(StartWalkersCoroutine());
-    //    }
-    //    else
-    //    {
-    //        StartWalkers();
-    //        PostFloorCreationJobs();
-    //    }
-    //}
     public GridSpace[,] GetLevelGrid() { return LevelGrid; }
 
     public void StartLevelCreation()
@@ -63,22 +50,23 @@ public class LevelGenerator : MonoBehaviour
         PostFloorCreationJobs();
     }
 
-    public void StartLevelCreation(int enemyStartNumber, int spawnerNumber)
+    private void SetUpPrefabs(int enemyStartNumber, List<LevelPrefab> _levelPrefabs)
     {
         EnemyStartNumber = enemyStartNumber;
 
-        LevelPrefabs.Clear();
-        LevelPrefabs.Add(new LevelPrefab { Instances = spawnerNumber, RequiredSpace = 1, SpaceType = GridSpace.SPAWNER });
+        LevelPrefabs = _levelPrefabs;
+    }
+
+    public void StartLevelCreation(int enemyStartNumber, List<LevelPrefab> _levelPrefabs)
+    {
+        SetUpPrefabs(enemyStartNumber, _levelPrefabs);
 
         StartLevelCreation();
     }
 
-    public void NextLevel(int enemyStartNumber, int spawnerNumber, Vector2 playerWorldSpace)
+    public void NextLevel(int enemyStartNumber, Vector2 playerWorldSpace)
     {
         EnemyStartNumber = enemyStartNumber;
-
-        LevelPrefabs.Clear();
-        LevelPrefabs.Add(new LevelPrefab { Instances = spawnerNumber, RequiredSpace = 1, SpaceType = GridSpace.SPAWNER });
 
         ResetNonFloorWallTiles();
 
@@ -432,7 +420,22 @@ public class LevelGenerator : MonoBehaviour
 [Serializable]
 public class LevelPrefab
 {
-    public int Instances;
+    public float StartNumber;
+    public float LevelIncrease;
     public int RequiredSpace;
     public GridSpace SpaceType;
+    public int Instances { get; private set; }
+    public float CurrentInstances { get; private set; }
+
+    public void Start()
+    {
+        Instances = Mathf.FloorToInt(StartNumber);
+        CurrentInstances = StartNumber;
+    }
+
+    public void NextLevel()
+    {
+        CurrentInstances *= (1 + LevelIncrease);
+        Instances = Mathf.FloorToInt(CurrentInstances);
+    }
 }

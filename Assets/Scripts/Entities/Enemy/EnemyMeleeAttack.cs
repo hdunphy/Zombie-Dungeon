@@ -37,6 +37,6 @@ public class EnemyMeleeAttack : MonoBehaviour, IEnemyAttack
 
     public bool CanAttack(Vector3 playerPosition)
     {
-        return Vector3.Distance(transform.position, playerPosition) > 2 * AttackRange;
+        return Vector3.Distance(transform.position, playerPosition) < 2 * AttackRange;
     }
 }
